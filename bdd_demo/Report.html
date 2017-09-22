@@ -1,0 +1,2469 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<!--
+			ExtentReports Library 2.41.1 | http://relevantcodes.com/extentreports-for-selenium/ | https://github.com/anshooarora/
+			Copyright (c) 2015, Anshoo Arora (Relevant Codes) | Copyrights licensed under the New BSD License | http://opensource.org/licenses/BSD-3-Clause
+			Documentation: http://extentreports.relevantcodes.com 
+		-->
+
+		<meta charset='UTF-8' /> 
+		<meta name='description' content='ExtentReports (by Anshoo Arora) is a reporting library for automation testing for .NET and Java. It creates detailed and beautiful HTML reports for modern browsers. ExtentReports shows test and step summary along with dashboards, system and environment details for quick analysis of your tests.' />
+		<meta name='robots' content='noodp, noydir' />
+		<meta name='viewport' content='width=device-width, initial-scale=1' />
+		<meta name='extentx' id='extentx' content='' />
+		
+		<title>
+				ExtentReports 2.0
+		</title>
+		
+		
+		<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' rel='stylesheet' type='text/css'>
+		<link href='https://cdn.rawgit.com/anshooarora/extentreports/6032d73243ba4fe4fb8769eb9c315d4fdf16fe68/cdn/extent.css' type='text/css' rel='stylesheet' />
+		
+		<style>
+				
+            
+                
+            
+        
+		</style>
+	</head>
+	
+	
+	<body class='extent default standard hide-overflow'>
+		<!-- nav -->
+		<nav>
+			<div class='logo-container blue darken-2'>
+				<a class='logo-content' href='http://extentreports.relevantcodes.com'>
+					<span>ExtentReports</span>
+				</a>
+				<a href='#' data-activates='slide-out' class='button-collapse hide-on-large-only'><i class='mdi-navigation-apps'></i></a>
+			</div>
+			<ul id='slide-out' class='side-nav fixed hide-on-med-and-down'>
+				<li class='analysis waves-effect active'><a href='#!' class='test-view' onclick="_updateCurrentStage(0)"><i class='mdi-action-dashboard'></i>Test Details</a></li>
+				<li class='analysis waves-effect'>
+					<a href='#!' onclick="_updateCurrentStage(-1)" class='dashboard-view'><i class='mdi-action-track-changes'></i></i>Analysis</a>
+				</li>
+			</ul>
+			<span class='report-name'>Automation Report</span> <span class='report-headline'></span>
+			<ul class='right hide-on-med-and-down nav-right'>
+				<li class='theme-selector' alt='Click to toggle dark theme. To enable by default, use js configuration $("body").addClass("dark");' title='Click to toggle dark theme. To enable by default, use js configuration $("body").addClass("dark");'>
+					<i class='mdi-hardware-desktop-windows'></i>
+				</li>
+				<li>
+					<span class='suite-started-time'>2017-09-22 10:54:33</span>
+				</li>
+				<li>
+					<span>v2.41.1</span>
+				</li>
+			</ul>
+		</nav>
+		<!-- /nav -->
+		
+		<!-- container -->
+		<div class='container'>
+			
+			<!-- dashboard -->
+			<div id='dashboard-view' class='row'>
+				<div class='time-totals'>
+					<div class='col l2 m4 s6'>
+						<div class='card suite-total-tests'> 
+							<span class='panel-name'>Total Tests</span> 
+							<span class='total-tests'> <span class='panel-lead'></span> </span> 
+						</div> 
+					</div>
+					<div class='col l2 m4 s6'>
+						<div class='card suite-total-steps'> 
+							<span class='panel-name'>Total Steps</span> 
+							<span class='total-steps'> <span class='panel-lead'></span> </span> 
+						</div> 
+					</div>
+					<div class='col l2 m4 s12'>
+						<div class='card suite-total-time-current'> 
+							<span class='panel-name'>Total Time Taken (Current Run)</span> 
+							<span class='suite-total-time-current-value panel-lead'>39h 37m 8s+588ms</span> 
+						</div> 
+					</div>
+					<div class='col l2 m4 s12'>
+						<div class='card suite-total-time-overall'> 
+							<span class='panel-name'>Total Time Taken (Overall)</span> 
+							<span class='suite-total-time-overall-value panel-lead'>-304h -18291m -1097507s+-110ms</span> 
+						</div> 
+					</div>
+					<div class='col l2 m4 s6 suite-start-time'>
+						<div class='card accent green-accent'> 
+							<span class='panel-name'>Start</span> 
+							<span class='panel-lead suite-started-time'>2017-09-20 19:17:25</span> 
+						</div> 
+					</div>
+					<div class='col l2 m4 s6 suite-end-time'>
+						<div class='card accent pink-accent'> 
+							<span class='panel-name'>End</span> 
+							<span class='panel-lead suite-ended-time'>2017-09-22 10:54:33</span> 
+						</div> 
+					</div>
+				</div>
+				<div class='charts'>
+					<div class='col s12 m6 l4 fh'> 
+						<div class='card-panel'> 
+							<div>
+								<span class='panel-name'>Tests View</span>
+							</div> 
+							<div class='panel-setting modal-trigger test-count-setting right'>
+								<a href='#test-count-setting'><i class='mdi-navigation-more-vert text-md'></i></a>
+							</div> 
+							<div class='chart-box'>
+								<canvas class='text-centered' id='test-analysis'></canvas>
+							</div> 
+							<div>
+								<span class='weight-light'><span class='t-pass-count weight-normal'></span> test(s) passed</span>
+							</div> 
+							<div>
+								<span class='weight-light'><span class='t-fail-count weight-normal'></span> test(s) failed, <span class='t-others-count weight-normal'></span> others</span>
+							</div> 
+						</div> 
+					</div> 
+					<div class='col s12 m6 l4 fh'> 
+						<div class='card-panel'> 
+							<div>
+								<span class='panel-name'>Steps View</span>
+							</div> 
+							<div class='panel-setting modal-trigger step-status-filter right'>
+								<a href='#step-status-filter'><i class='mdi-navigation-more-vert text-md'></i></a>
+							</div> 
+							<div class='chart-box'>
+								<canvas class='text-centered' id='step-analysis'></canvas>
+							</div> 
+							<div>
+								<span class='weight-light'><span class='s-pass-count weight-normal'></span> step(s) passed </span>
+							</div> 
+							<div>
+								<span class='weight-light'><span class='s-fail-count weight-normal'></span> step(s) failed, <span class='s-others-count weight-normal'></span> others</span>
+							</div> 
+						</div> 
+					</div>
+					<div class='col s12 m12 l4 fh'> 
+						<div class='card-panel'> 
+							<span class='panel-name'>Pass Percentage</span> 
+							<span class='pass-percentage panel-lead'></span> 
+							<div class='progress light-blue lighten-3'> 
+								<div class='determinate light-blue'></div> 
+							</div> 
+						</div> 
+					</div>
+				</div>
+				<div class='system-view'>
+					<div class='col l4 m12 s12'>
+						<div class='card-panel'>
+							<span class='label info outline right'>Environment</span>
+							<table>
+								<thead>
+									<tr>
+										<th>Param</th>
+										<th>Value</th>
+									</tr>
+								</thead>
+								<tbody>
+										<tr>
+											<td>User Name</td>
+											<td>PMateti</td>
+										</tr>
+										<tr>
+											<td>OS</td>
+											<td>Windows 10</td>
+										</tr>
+										<tr>
+											<td>Java Version</td>
+											<td>1.8.0_144</td>
+										</tr>
+										<tr>
+											<td>Host Name</td>
+											<td>AJ001289</td>
+										</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /dashboard -->
+			
+			<!-- tests -->
+			<div id='test-view' class='row _addedTable'>
+				<div class='col _addedCell1'>
+					<div class='contents'>
+						<div class='card-panel heading'>
+							<h5>Tests</h5>
+						</div>
+						<div class='card-panel filters'>
+							<div>
+								<a class='dropdown-button btn-floating btn-small waves-effect waves-light grey tests-toggle' data-activates='tests-toggle' data-constrainwidth='true' data-beloworigin='true' data-hover='true' href='#'>
+									<i class='mdi-action-reorder'></i>
+								</a>
+								<ul id='tests-toggle' class='dropdown-content'>
+									<li class='pass'><a href='#!'>Pass</a></li>
+									<li class='fail'><a href='#!'>Fail</a></li>
+									<li class='skip'><a href='#!'>Skip</a></li>
+									<li class='divider'></li>
+									<li class='clear'><a href='#!'>Clear Filters</a></li>
+								</ul>
+							</div>
+							<div>
+								<a class='btn-floating btn-small waves-effect waves-light grey' id='clear-filters' alt='Clear Filters' title='Clear Filters'>
+									<i class='mdi-navigation-close'></i>
+								</a>
+							</div>
+							<div>
+								<a class='btn-floating btn-small waves-effect waves-light grey' id='enableDashboard' alt='Enable Dashboard' title='Enable Dashboard'>
+									<i class='mdi-action-track-changes'></i>
+								</a>
+							</div>
+							<div>
+								<a class='btn-floating btn-small waves-effect waves-light blue enabled' id='refreshCharts' alt='Refresh Charts on Filters' title='Refresh Charts on Filters'>
+									<i class='mdi-navigation-refresh'></i>
+								</a>
+							</div>
+							<div class='search' alt='Search Tests' title='Search Tests'>
+								<div class='input-field left'>
+									<input id='searchTests' type='text' class='validate' placeholder='Search Tests...'>
+								</div>
+								<a href="#" class='btn-floating btn-small waves-effect waves-light grey'>
+									<i class='mdi-action-search'></i>
+								</a>
+							</div>
+						</div>
+						<div class='card-panel no-padding-h no-padding-v no-margin-v'>
+							<div class='wrapper'>
+								<ul id='test-collection' class='test-collection'>
+										<li class='collection-item test displayed active pass ' extentid='9ac7bbc3-892b-4ee6-8654-5bdfd33455ea'>
+											<div class='test-head'>
+												<span class='test-name'>Report </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2017-09-22 10:48:02</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2017-09-22 10:54:33</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 6m 30s+499ms</span>
+												</div>
+												<div class='test-desc'>EligibilityStepFile report</div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																	<th>StepName</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:48:49</td>
+																		<td class='step-name'>Launch Vantage Home Page as Admin</td>
+																	<td class='step-details'>Expected: User should be able to navigate to Home Page | Actual: Vantage Home Page launched successfully<a href='src/test/results/screenshot-227e54c6-b54f-4664-983d-a6c0fe6d5153.png' data-featherlight='image'><img class='report-img' src='src/test/results/screenshot-227e54c6-b54f-4664-983d-a6c0fe6d5153.png' /></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:48:50</td>
+																		<td class='step-name'>Click on People from the Menu Bar</td>
+																	<td class='step-details'>Expected: People Menu should be displayed | Actual: People Menu is displayed successfully<a href='src/test/results/screenshot-02f87ccd-4207-42b8-8b09-70a089fc81df.png' data-featherlight='image'><img class='report-img' src='src/test/results/screenshot-02f87ccd-4207-42b8-8b09-70a089fc81df.png' /></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:48:55</td>
+																		<td class='step-name'>Click on Benefits from the list</td>
+																	<td class='step-details'>Expected: Benefits Sub Menu should be displayed | Actual: Benefits Sub Menu is displayed successfully<a href='src/test/results/screenshot-ab7b6773-d626-4073-9c3f-1c9719e6a065.png' data-featherlight='image'><img class='report-img' src='src/test/results/screenshot-ab7b6773-d626-4073-9c3f-1c9719e6a065.png' /></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:49:01</td>
+																		<td class='step-name'>Click on Life Events from the list</td>
+																	<td class='step-details'>Expected: Life Events should be clicked and Employee ID search page should be displayed | Actual: Employee ID search Page is displayed successfully<a href='src/test/results/screenshot-c435830d-6639-464e-ad6c-8c3027a54b34.png' data-featherlight='image'><img class='report-img' src='src/test/results/screenshot-c435830d-6639-464e-ad6c-8c3027a54b34.png' /></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:49:01</td>
+																		<td class='step-name'>Enter Employee ID in the TextBox</td>
+																	<td class='step-details'>Expected: Employee ID should be entered | Actual: Employee ID entered successfully<a href='src/test/results/screenshot-2e57d557-eaab-4589-9063-6948b6b7cb54.png' data-featherlight='image'><img class='report-img' src='src/test/results/screenshot-2e57d557-eaab-4589-9063-6948b6b7cb54.png' /></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:49:07</td>
+																		<td class='step-name'>Click on Search Button</td>
+																	<td class='step-details'>Expected: Employee details should be displayed in the Results Grid | Actual: Employee Details displayed successfully<a href='src/test/results/screenshot-9ef3df3e-9606-4b53-935d-8ab3afb95a02.png' data-featherlight='image'><img class='report-img' src='src/test/results/screenshot-9ef3df3e-9606-4b53-935d-8ab3afb95a02.png' /></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:49:12</td>
+																		<td class='step-name'>Click on Employee Last Name Hyperlink</td>
+																	<td class='step-details'>Expected: A popup should be displayed to enter date and Enrolling details | Actual: Popup displayed successfully<a href='src/test/results/screenshot-459c2e95-7df0-412b-b7a9-ed6eba3e8a11.png' data-featherlight='image'><img class='report-img' src='src/test/results/screenshot-459c2e95-7df0-412b-b7a9-ed6eba3e8a11.png' /></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:49:19</td>
+																		<td class='step-name'>Click on Ok on the Popup</td>
+																	<td class='step-details'>Expected: New Page should be displayed with Report a Life Event hyperlink | Actual: New Page displayed successfully with Report a Life Event Hyperlink<a href='src/test/results/screenshot-2fbe7dbf-fba6-485c-89ba-400e73cff2dd.png' data-featherlight='image'><img class='report-img' src='src/test/results/screenshot-2fbe7dbf-fba6-485c-89ba-400e73cff2dd.png' /></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:49:26</td>
+																		<td class='step-name'>Click on Report a Life Event Hyperlink</td>
+																	<td class='step-details'>Expected: Report a Life Event Pop-up should be displayed | Actual: Report a Life Event Pop-up displayed successfully<a href='src/test/results/screenshot-8456380d-dbef-4701-b36c-af8c39d534b2.png' data-featherlight='image'><img class='report-img' src='src/test/results/screenshot-8456380d-dbef-4701-b36c-af8c39d534b2.png' /></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:49:30</td>
+																		<td class='step-name'>Select Admin Correction from the dropdown and Current Date in the Pop-Up</td>
+																	<td class='step-details'>Expected: Admin Correction and Current Date in the Pop-Up should be selected | Actual: Admin Correction and Current Date in the Pop-Up selected successfully<a href='src/test/results/screenshot-7103c2ee-3a9e-4bb4-9776-8c9ddc0acd21.png' data-featherlight='image'><img class='report-img' src='src/test/results/screenshot-7103c2ee-3a9e-4bb4-9776-8c9ddc0acd21.png' /></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:49:40</td>
+																		<td class='step-name'>Click on Submit in the Pop-up</td>
+																	<td class='step-details'>Expected: New Page with Employee Confirmation Details should be displayed | Actual: New Page with Employee Confirmation Details displayed successfully<a href='src/test/results/screenshot-2305a8a1-510b-4b53-8333-f983ec6662be.png' data-featherlight='image'><img class='report-img' src='src/test/results/screenshot-2305a8a1-510b-4b53-8333-f983ec6662be.png' /></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:54:14</td>
+																		<td class='step-name'>Click on Submit</td>
+																	<td class='step-details'>Expected: New Page with Admin Correction Link should be displayed | Actual: New Page with Admin Correction link displayed successfully<a href='src/test/results/screenshot-861a1186-af08-4940-830a-abb87b1f8f84.png' data-featherlight='image'><img class='report-img' src='src/test/results/screenshot-861a1186-af08-4940-830a-abb87b1f8f84.png' /></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:54:20</td>
+																		<td class='step-name'>Click on Admin Correction Link</td>
+																	<td class='step-details'>Expected: Enrollments Page with Eligibility Summary link on the right should be displayed | Actual: Enrollments Page with Eligibility Summary link on the right should be displayed successfully<a href='src/test/results/screenshot-f3244775-2401-454a-a504-b7b94edd9cb8.png' data-featherlight='image'><img class='report-img' src='src/test/results/screenshot-f3244775-2401-454a-a504-b7b94edd9cb8.png' /></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:54:31</td>
+																		<td class='step-name'>Verify if the Eligibility Summary is displayed</td>
+																	<td class='step-details'>Expected: Eligibility Summary of the Employee should be displayed | Actual: Eligibility Summary of the Employee displays successfully<a href='src/test/results/screenshot-1ee66c12-0288-4ba1-8323-e45cf2394caa.png' data-featherlight='image'><img class='report-img' src='src/test/results/screenshot-1ee66c12-0288-4ba1-8323-e45cf2394caa.png' /></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:54:31</td>
+																		<td class='step-name'>Verify if the Eligibility Summary Opens in a new web page</td>
+																	<td class='step-details'>Expected: Eligibility Summary of the Employee should be opened in a new web page | Actual: Eligibility Summary of the Employee Opens in a new web page successfully<a href='src/test/results/screenshot-9997b807-d169-4ae9-be24-969c2df6a50d.png' data-featherlight='image'><img class='report-img' src='src/test/results/screenshot-9997b807-d169-4ae9-be24-969c2df6a50d.png' /></a></td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='4d6d13a3-dec4-4323-8ccf-fce8e0417716'>
+											<div class='test-head'>
+												<span class='test-name'>Report </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2017-09-22 09:08:50</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2017-09-22 09:15:07</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 6m 17s+0ms</span>
+												</div>
+												<div class='test-desc'>EligibilityStepFile report</div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																	<th>StepName</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:09:36</td>
+																		<td class='step-name'>Launch Vantage Home Page as Admin</td>
+																	<td class='step-details'>Expected: User should be able to navigate to Home Page | Actual: Vantage Home Page launched successfully<a href="src/test/results/screenshot-a015277d-4f8a-47db-bf6b-6175efdfd97d.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-a015277d-4f8a-47db-bf6b-6175efdfd97d.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:09:36</td>
+																		<td class='step-name'>Click on People from the Menu Bar</td>
+																	<td class='step-details'>Expected: People Menu should be displayed | Actual: People Menu is displayed successfully<a href="src/test/results/screenshot-eccca903-4a47-4f2b-9d40-f22f23cf76aa.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-eccca903-4a47-4f2b-9d40-f22f23cf76aa.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:09:42</td>
+																		<td class='step-name'>Click on Benefits from the list</td>
+																	<td class='step-details'>Expected: Benefits Sub Menu should be displayed | Actual: Benefits Sub Menu is displayed successfully<a href="src/test/results/screenshot-a814b662-220d-4564-8476-3c4c02720462.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-a814b662-220d-4564-8476-3c4c02720462.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:09:47</td>
+																		<td class='step-name'>Click on Life Events from the list</td>
+																	<td class='step-details'>Expected: Life Events should be clicked and Employee ID search page should be displayed | Actual: Employee ID search Page is displayed successfully<a href="src/test/results/screenshot-e539552b-de01-4141-b06b-edd9041192fc.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-e539552b-de01-4141-b06b-edd9041192fc.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:09:48</td>
+																		<td class='step-name'>Enter Employee ID in the TextBox</td>
+																	<td class='step-details'>Expected: Employee ID should be entered | Actual: Employee ID entered successfully<a href="src/test/results/screenshot-377d8ea6-bf03-4cd1-b176-f1b377089e1c.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-377d8ea6-bf03-4cd1-b176-f1b377089e1c.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:09:53</td>
+																		<td class='step-name'>Click on Search Button</td>
+																	<td class='step-details'>Expected: Employee details should be displayed in the Results Grid | Actual: Employee Details displayed successfully<a href="src/test/results/screenshot-e79d2795-f7e8-465c-9e80-6706cd95d077.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-e79d2795-f7e8-465c-9e80-6706cd95d077.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:09:59</td>
+																		<td class='step-name'>Click on Employee Last Name Hyperlink</td>
+																	<td class='step-details'>Expected: A popup should be displayed to enter date and Enrolling details | Actual: Popup displayed successfully<a href="src/test/results/screenshot-984b1e41-75a4-44d3-b8bf-b0ebafdd696f.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-984b1e41-75a4-44d3-b8bf-b0ebafdd696f.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:10:04</td>
+																		<td class='step-name'>Click on Ok on the Popup</td>
+																	<td class='step-details'>Expected: New Page should be displayed with Report a Life Event hyperlink | Actual: New Page displayed successfully with Report a Life Event Hyperlink<a href="src/test/results/screenshot-0acc8743-4d00-4f2a-9db9-674c59a38f92.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-0acc8743-4d00-4f2a-9db9-674c59a38f92.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:10:04</td>
+																		<td class='step-name'>Click on Report a Life Event Hyperlink</td>
+																	<td class='step-details'>Expected: Report a Life Event Pop-up should be displayed | Actual: Report a Life Event Pop-up displayed successfully<a href="src/test/results/screenshot-08cab0a5-3e44-48db-959d-fa12bc508e92.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-08cab0a5-3e44-48db-959d-fa12bc508e92.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:10:09</td>
+																		<td class='step-name'>Select Admin Correction from the dropdown and Current Date in the Pop-Up</td>
+																	<td class='step-details'>Expected: Admin Correction and Current Date in the Pop-Up should be selected | Actual: Admin Correction and Current Date in the Pop-Up selected successfully<a href="src/test/results/screenshot-789c8dc0-2f6a-42b9-94e1-2b49995c7706.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-789c8dc0-2f6a-42b9-94e1-2b49995c7706.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:10:18</td>
+																		<td class='step-name'>Click on Submit in the Pop-up</td>
+																	<td class='step-details'>Expected: New Page with Employee Confirmation Details should be displayed | Actual: New Page with Employee Confirmation Details displayed successfully<a href="src/test/results/screenshot-baa5b6fe-8b24-487d-be21-2983f1f03b3e.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-baa5b6fe-8b24-487d-be21-2983f1f03b3e.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:14:47</td>
+																		<td class='step-name'>Click on Submit</td>
+																	<td class='step-details'>Expected: New Page with Admin Correction Link should be displayed | Actual: New Page with Admin Correction link displayed successfully<a href="src/test/results/screenshot-5bfbe47f-e936-405a-914d-43553f5cfa5a.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-5bfbe47f-e936-405a-914d-43553f5cfa5a.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:14:55</td>
+																		<td class='step-name'>Click on Admin Correction Link</td>
+																	<td class='step-details'>Expected: Enrollments Page with Eligibility Summary link on the right should be displayed | Actual: Enrollments Page with Eligibility Summary link on the right should be displayed successfully<a href="src/test/results/screenshot-398c23c2-027d-4abf-a998-84d776a008f2.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-398c23c2-027d-4abf-a998-84d776a008f2.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:15:05</td>
+																		<td class='step-name'>Verify if the Eligibility Summary Opens in a new web page</td>
+																	<td class='step-details'>Expected: Eligibility Summary of the Employee should be opened in a new web page | Actual: Eligibility Summary of the Employee Opens in a new web page successfully<a href="src/test/results/screenshot-5067872c-4c18-459b-b82c-7ce281d5026d.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-5067872c-4c18-459b-b82c-7ce281d5026d.png"></a></td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='821f0fe1-aa48-4584-83c9-ca6132872aad'>
+											<div class='test-head'>
+												<span class='test-name'>Report </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2017-09-21 13:04:53</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2017-09-21 13:07:16</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 2m 23s+0ms</span>
+												</div>
+												<div class='test-desc'>EligibilityStepFile report</div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																	<th>StepName</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>13:05:40</td>
+																		<td class='step-name'>Launch Vantage Home Page as Admin</td>
+																	<td class='step-details'>Expected: User should be able to navigate to Home Page | Actual: Vantage Home Page launched successfully<a href="src/test/results/screenshot-d06b51b5-bbf3-4ecf-9087-a27c82f72d84.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-d06b51b5-bbf3-4ecf-9087-a27c82f72d84.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>13:05:41</td>
+																		<td class='step-name'>Click on People from the Menu Bar</td>
+																	<td class='step-details'>Expected: People Menu should be displayed | Actual: People Menu is displayed successfully<a href="src/test/results/screenshot-1d027bd8-9d87-40d7-b2d6-9ce62b645b30.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-1d027bd8-9d87-40d7-b2d6-9ce62b645b30.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>13:05:47</td>
+																		<td class='step-name'>Click on Benefits from the list</td>
+																	<td class='step-details'>Expected: Benefits Sub Menu should be displayed | Actual: Benefits Sub Menu is displayed successfully<a href="src/test/results/screenshot-2b61a0a5-a174-4f0c-9bb9-41c973f9db07.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-2b61a0a5-a174-4f0c-9bb9-41c973f9db07.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>13:05:52</td>
+																		<td class='step-name'>Click on Life Events from the list</td>
+																	<td class='step-details'>Expected: Life Events should be clicked and Employee ID search page should be displayed | Actual: Employee ID search Page is displayed successfully<a href="src/test/results/screenshot-96becd7c-0f26-4445-adb2-bd9a5c83f34a.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-96becd7c-0f26-4445-adb2-bd9a5c83f34a.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>13:05:53</td>
+																		<td class='step-name'>Enter Employee ID in the TextBox</td>
+																	<td class='step-details'>Expected: Employee ID should be entered | Actual: Employee ID entered successfully<a href="src/test/results/screenshot-5a77f615-95fb-46bc-a054-36913e68bbc4.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-5a77f615-95fb-46bc-a054-36913e68bbc4.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>13:05:58</td>
+																		<td class='step-name'>Click on Search Button</td>
+																	<td class='step-details'>Expected: Employee details should be displayed in the Results Grid | Actual: Employee Details displayed successfully<a href="src/test/results/screenshot-8dd95faa-5cde-4832-a0ea-5277fb6f3b1f.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-8dd95faa-5cde-4832-a0ea-5277fb6f3b1f.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>13:06:04</td>
+																		<td class='step-name'>Click on Employee Last Name Hyperlink</td>
+																	<td class='step-details'>Expected: A popup should be displayed to enter date and Enrolling details | Actual: Popup displayed successfully<a href="src/test/results/screenshot-fa05b962-3e5b-4b2e-a0de-272c904c4654.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-fa05b962-3e5b-4b2e-a0de-272c904c4654.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>13:06:11</td>
+																		<td class='step-name'>Click on Ok on the Popup</td>
+																	<td class='step-details'>Expected: New Page should be displayed with Report a Life Event hyperlink | Actual: New Page displayed successfully with Report a Life Event Hyperlink<a href="src/test/results/screenshot-3c60f029-f865-4dac-a090-49716ed3fb24.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-3c60f029-f865-4dac-a090-49716ed3fb24.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>13:06:17</td>
+																		<td class='step-name'>Click on Report a Life Event Hyperlink</td>
+																	<td class='step-details'>Expected: Report a Life Event Pop-up should be displayed | Actual: Report a Life Event Pop-up displayed successfully<a href="src/test/results/screenshot-cc73369a-9731-43f0-bf47-b92d53363e50.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-cc73369a-9731-43f0-bf47-b92d53363e50.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>13:06:22</td>
+																		<td class='step-name'>Select Admin Correction from the dropdown and Current Date in the Pop-Up</td>
+																	<td class='step-details'>Expected: Admin Correction and Current Date in the Pop-Up should be selected | Actual: Admin Correction and Current Date in the Pop-Up selected successfully<a href="src/test/results/screenshot-bd7fb709-6a33-49c1-aaa8-80327cef3305.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-bd7fb709-6a33-49c1-aaa8-80327cef3305.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>13:06:31</td>
+																		<td class='step-name'>Click on Submit in the Pop-up</td>
+																	<td class='step-details'>Expected: New Page with Employee Confirmation Details should be displayed | Actual: New Page with Employee Confirmation Details displayed successfully<a href="src/test/results/screenshot-2111dfba-2f6b-466d-b59c-35c2900afebd.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-2111dfba-2f6b-466d-b59c-35c2900afebd.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>13:06:53</td>
+																		<td class='step-name'>Click on Submit</td>
+																	<td class='step-details'>Expected: New Page with Admin Correction Link should be displayed | Actual: New Page with Admin Correction link displayed successfully<a href="src/test/results/screenshot-f9b83be9-d8c4-45c9-a629-933aef009bc0.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-f9b83be9-d8c4-45c9-a629-933aef009bc0.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>13:07:00</td>
+																		<td class='step-name'>Click on Admin Correction Link</td>
+																	<td class='step-details'>Expected: Enrollments Page with Eligibility Summary link on the right should be displayed | Actual: Enrollments Page with Eligibility Summary link on the right should be displayed successfully<a href="src/test/results/screenshot-5f7954c0-050c-40b3-8e7c-f45df79527bb.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-5f7954c0-050c-40b3-8e7c-f45df79527bb.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>13:07:14</td>
+																		<td class='step-name'>Verify if the Eligibility Summary Opens in a new web page</td>
+																	<td class='step-details'>Expected: Eligibility Summary of the Employee should be opened in a new web page | Actual: Eligibility Summary of the Employee Opens in a new web page successfully<a href="src/test/results/screenshot-9e0b5f6f-9d6b-415a-bda7-4ff50dd79df1.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-9e0b5f6f-9d6b-415a-bda7-4ff50dd79df1.png"></a></td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='6ca2ddff-0fe4-4e70-9e41-d5aed3ea39d1'>
+											<div class='test-head'>
+												<span class='test-name'>Report </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2017-09-21 12:07:43</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2017-09-21 12:10:26</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 2m 43s+0ms</span>
+												</div>
+												<div class='test-desc'>EligibilityStepFile report</div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																	<th>StepName</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:08:28</td>
+																		<td class='step-name'>Launch Vantage Home Page as Admin</td>
+																	<td class='step-details'>Expected: User should be able to navigate to Home Page | Actual: Vantage Home Page launched successfully<a href="src/test/results/screenshot-e58cf5e1-27d1-460e-a840-cd709122e999.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-e58cf5e1-27d1-460e-a840-cd709122e999.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:08:54</td>
+																		<td class='step-name'>Click on People from the Menu Bar</td>
+																	<td class='step-details'>Expected: People Menu should be displayed | Actual: People Menu is displayed successfully<a href="src/test/results/screenshot-1e97272d-fcce-442d-8180-67bf34ba95ba.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-1e97272d-fcce-442d-8180-67bf34ba95ba.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:08:59</td>
+																		<td class='step-name'>Click on Benefits from the list</td>
+																	<td class='step-details'>Expected: Benefits Sub Menu should be displayed | Actual: Benefits Sub Menu is displayed successfully<a href="src/test/results/screenshot-01c0faef-33a8-4068-b0bc-14592cf97f1d.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-01c0faef-33a8-4068-b0bc-14592cf97f1d.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:09:05</td>
+																		<td class='step-name'>Click on Life Events from the list</td>
+																	<td class='step-details'>Expected: Life Events should be clicked and Employee ID search page should be displayed | Actual: Employee ID search Page is displayed successfully<a href="src/test/results/screenshot-833b9b8d-0155-4e10-a53b-7f7ae23ebcda.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-833b9b8d-0155-4e10-a53b-7f7ae23ebcda.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:09:05</td>
+																		<td class='step-name'>Enter Employee ID in the TextBox</td>
+																	<td class='step-details'>Expected: Employee ID should be entered | Actual: Employee ID entered successfully<a href="src/test/results/screenshot-7b68a9ff-16ba-4ae2-809a-196b2610eff4.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-7b68a9ff-16ba-4ae2-809a-196b2610eff4.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:09:10</td>
+																		<td class='step-name'>Click on Search Button</td>
+																	<td class='step-details'>Expected: Employee details should be displayed in the Results Grid | Actual: Employee Details displayed successfully<a href="src/test/results/screenshot-b99a1ee6-40d5-47dd-8915-6ef72680d7ce.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-b99a1ee6-40d5-47dd-8915-6ef72680d7ce.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:09:16</td>
+																		<td class='step-name'>Click on Employee Last Name Hyperlink</td>
+																	<td class='step-details'>Expected: A popup should be displayed to enter date and Enrolling details | Actual: Popup displayed successfully<a href="src/test/results/screenshot-81011e86-3566-4eb5-a74b-059f4f19ca55.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-81011e86-3566-4eb5-a74b-059f4f19ca55.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:09:21</td>
+																		<td class='step-name'>Click on Ok on the Popup</td>
+																	<td class='step-details'>Expected: New Page should be displayed with Report a Life Event hyperlink | Actual: New Page displayed successfully with Report a Life Event Hyperlink<a href="src/test/results/screenshot-881960b1-cf16-4902-8c90-23bd76adf155.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-881960b1-cf16-4902-8c90-23bd76adf155.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:09:27</td>
+																		<td class='step-name'>Click on Report a Life Event Hyperlink</td>
+																	<td class='step-details'>Expected: Report a Life Event Pop-up should be displayed | Actual: Report a Life Event Pop-up displayed successfully<a href="src/test/results/screenshot-b9fc36e0-f66a-485b-bf32-6c4bab775148.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-b9fc36e0-f66a-485b-bf32-6c4bab775148.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:09:32</td>
+																		<td class='step-name'>Select Admin Correction from the dropdown and Current Date in the Pop-Up</td>
+																	<td class='step-details'>Expected: Admin Correction and Current Date in the Pop-Up should be selected | Actual: Admin Correction and Current Date in the Pop-Up selected successfully<a href="src/test/results/screenshot-ffbf973f-bee1-4ee2-9c28-c3d433852f80.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-ffbf973f-bee1-4ee2-9c28-c3d433852f80.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:09:41</td>
+																		<td class='step-name'>Click on Submit in the Pop-up</td>
+																	<td class='step-details'>Expected: New Page with Employee Confirmation Details should be displayed | Actual: New Page with Employee Confirmation Details displayed successfully<a href="src/test/results/screenshot-cca28601-d758-4b96-bd06-774a389ca2bc.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-cca28601-d758-4b96-bd06-774a389ca2bc.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:10:04</td>
+																		<td class='step-name'>Click on Submit</td>
+																	<td class='step-details'>Expected: New Page with Admin Correction Link should be displayed | Actual: New Page with Admin Correction link displayed successfully<a href="src/test/results/screenshot-30eec078-b858-4874-afd1-5ee082149127.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-30eec078-b858-4874-afd1-5ee082149127.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:10:10</td>
+																		<td class='step-name'>Click on Admin Correction Link</td>
+																	<td class='step-details'>Expected: Enrollments Page with Eligibility Summary link on the right should be displayed | Actual: Enrollments Page with Eligibility Summary link on the right should be displayed successfully<a href="src/test/results/screenshot-a42c7b23-fa9a-4428-8d7c-4a679f64bccb.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-a42c7b23-fa9a-4428-8d7c-4a679f64bccb.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:10:24</td>
+																		<td class='step-name'>Verify if the Eligibility Summary Opens in a new web page</td>
+																	<td class='step-details'>Expected: Eligibility Summary of the Employee should be opened in a new web page | Actual: Eligibility Summary of the Employee Opens in a new web page successfully<a href="src/test/results/screenshot-0f4b67c8-43b7-4cd8-8f0c-049ac40b02b1.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-0f4b67c8-43b7-4cd8-8f0c-049ac40b02b1.png"></a></td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='6d68ce1a-cd6d-4bcc-8d2c-721cabc65685'>
+											<div class='test-head'>
+												<span class='test-name'>Report </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2017-09-21 11:48:35</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2017-09-21 11:51:12</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 2m 37s+0ms</span>
+												</div>
+												<div class='test-desc'>EligibilityStepFile report</div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																	<th>StepName</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:49:21</td>
+																		<td class='step-name'>Launch Vantage Home Page as Admin</td>
+																	<td class='step-details'>Expected: User should be able to navigate to Home Page | Actual: Vantage Home Page launched successfully<a href="src/test/results/screenshot-ba33f4cd-1843-4357-b43a-78d151bc4d2e.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-ba33f4cd-1843-4357-b43a-78d151bc4d2e.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:49:46</td>
+																		<td class='step-name'>Click on People from the Menu Bar</td>
+																	<td class='step-details'>Expected: People Menu should be displayed | Actual: People Menu is displayed successfully<a href="src/test/results/screenshot-be14ea5f-0e22-43d4-9f87-b6a745426518.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-be14ea5f-0e22-43d4-9f87-b6a745426518.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:49:52</td>
+																		<td class='step-name'>Click on Benefits from the list</td>
+																	<td class='step-details'>Expected: Benefits Sub Menu should be displayed | Actual: Benefits Sub Menu is displayed successfully<a href="src/test/results/screenshot-df0741c3-c958-4d74-998d-9d7d2cce8f79.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-df0741c3-c958-4d74-998d-9d7d2cce8f79.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:49:57</td>
+																		<td class='step-name'>Click on Life Events from the list</td>
+																	<td class='step-details'>Expected: Life Events should be clicked and Employee ID search page should be displayed | Actual: Employee ID search Page is displayed successfully<a href="src/test/results/screenshot-996ba7da-f28a-4144-9537-938d50f2514a.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-996ba7da-f28a-4144-9537-938d50f2514a.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:49:58</td>
+																		<td class='step-name'>Enter Employee ID in the TextBox</td>
+																	<td class='step-details'>Expected: Employee ID should be entered | Actual: Employee ID entered successfully<a href="src/test/results/screenshot-f859cf74-4f5a-404f-bb64-d16390570682.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-f859cf74-4f5a-404f-bb64-d16390570682.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:50:03</td>
+																		<td class='step-name'>Click on Search Button</td>
+																	<td class='step-details'>Expected: Employee details should be displayed in the Results Grid | Actual: Employee Details displayed successfully<a href="src/test/results/screenshot-5fa866b8-e6db-4b45-b868-d44991318718.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-5fa866b8-e6db-4b45-b868-d44991318718.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:50:09</td>
+																		<td class='step-name'>Click on Employee Last Name Hyperlink</td>
+																	<td class='step-details'>Expected: A popup should be displayed to enter date and Enrolling details | Actual: Popup displayed successfully<a href="src/test/results/screenshot-39ce8b79-2c78-4e2f-bb5a-138ad6edbd94.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-39ce8b79-2c78-4e2f-bb5a-138ad6edbd94.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:50:14</td>
+																		<td class='step-name'>Click on Ok on the Popup</td>
+																	<td class='step-details'>Expected: New Page should be displayed with Report a Life Event hyperlink | Actual: New Page displayed successfully with Report a Life Event Hyperlink<a href="src/test/results/screenshot-45ae14ab-5ca5-4356-9e60-f214d5ab6f37.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-45ae14ab-5ca5-4356-9e60-f214d5ab6f37.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:50:21</td>
+																		<td class='step-name'>Click on Report a Life Event Hyperlink</td>
+																	<td class='step-details'>Expected: Report a Life Event Pop-up should be displayed | Actual: Report a Life Event Pop-up displayed successfully<a href="src/test/results/screenshot-a48b9e96-91d1-42ca-8136-1b206194dc15.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-a48b9e96-91d1-42ca-8136-1b206194dc15.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:50:26</td>
+																		<td class='step-name'>Select Admin Correction from the dropdown and Current Date in the Pop-Up</td>
+																	<td class='step-details'>Expected: Admin Correction and Current Date in the Pop-Up should be selected | Actual: Admin Correction and Current Date in the Pop-Up selected successfully<a href="src/test/results/screenshot-2596f7d4-425e-46bc-8a2a-322769d0e540.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-2596f7d4-425e-46bc-8a2a-322769d0e540.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:50:34</td>
+																		<td class='step-name'>Click on Submit in the Pop-up</td>
+																	<td class='step-details'>Expected: New Page with Employee Confirmation Details should be displayed | Actual: New Page with Employee Confirmation Details displayed successfully<a href="src/test/results/screenshot-770574ca-6cd5-4170-ad1c-0672385ac586.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-770574ca-6cd5-4170-ad1c-0672385ac586.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:50:50</td>
+																		<td class='step-name'>Click on Submit</td>
+																	<td class='step-details'>Expected: New Page with Admin Correction Link should be displayed | Actual: New Page with Admin Correction link displayed successfully<a href="src/test/results/screenshot-901aa26f-edbb-490b-ac0c-bcdc4bd595b7.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-901aa26f-edbb-490b-ac0c-bcdc4bd595b7.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:50:56</td>
+																		<td class='step-name'>Click on Admin Correction Link</td>
+																	<td class='step-details'>Expected: Enrollments Page with Eligibility Summary link on the right should be displayed | Actual: Enrollments Page with Eligibility Summary link on the right should be displayed successfully<a href="src/test/results/screenshot-ec6b76f0-9888-4291-8c75-14ad2dee8e8d.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-ec6b76f0-9888-4291-8c75-14ad2dee8e8d.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:51:10</td>
+																		<td class='step-name'>Verify if the Eligibility Summary Opens in a new web page</td>
+																	<td class='step-details'>Expected: Eligibility Summary of the Employee should be opened in a new web page | Actual: Eligibility Summary of the Employee Opens in a new web page successfully<a href="src/test/results/screenshot-0dd5e6cc-fe37-41e7-b65a-786c7e1e60bb.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-0dd5e6cc-fe37-41e7-b65a-786c7e1e60bb.png"></a></td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='1808947c-5848-4260-a5c5-cc3fdb29b289'>
+											<div class='test-head'>
+												<span class='test-name'>Report </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2017-09-21 11:33:16</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2017-09-21 11:35:39</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 2m 23s+0ms</span>
+												</div>
+												<div class='test-desc'>EligibilityStepFile report</div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																	<th>StepName</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:34:00</td>
+																		<td class='step-name'>Launch Vantage Home Page as Admin</td>
+																	<td class='step-details'>Expected: User should be able to navigate to Home Page | Actual: Vantage Home Page launched successfully<a href="src/test/results/screenshot-8427d741-cc41-4216-9e8a-dbd8452af77c.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-8427d741-cc41-4216-9e8a-dbd8452af77c.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:34:26</td>
+																		<td class='step-name'>Click on People from the Menu Bar</td>
+																	<td class='step-details'>Expected: People Menu should be displayed | Actual: People Menu is displayed successfully<a href="src/test/results/screenshot-3fbcc3d9-4cb3-4382-9b3f-2cb2cb1dbd09.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-3fbcc3d9-4cb3-4382-9b3f-2cb2cb1dbd09.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:34:31</td>
+																		<td class='step-name'>Click on Benefits from the list</td>
+																	<td class='step-details'>Expected: Benefits Sub Menu should be displayed | Actual: Benefits Sub Menu is displayed successfully<a href="src/test/results/screenshot-1ce4d8eb-afa1-422d-bcae-49ab20497f75.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-1ce4d8eb-afa1-422d-bcae-49ab20497f75.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:34:37</td>
+																		<td class='step-name'>Click on Life Events from the list</td>
+																	<td class='step-details'>Expected: Life Events should be clicked and Employee ID search page should be displayed | Actual: Employee ID search Page is displayed successfully<a href="src/test/results/screenshot-da4e800c-2fe1-4bb3-9033-e4f8b04eda5c.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-da4e800c-2fe1-4bb3-9033-e4f8b04eda5c.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:34:37</td>
+																		<td class='step-name'>Enter Employee ID in the TextBox</td>
+																	<td class='step-details'>Expected: Employee ID should be entered | Actual: Employee ID entered successfully<a href="src/test/results/screenshot-00a9385a-d63d-4217-9690-82aa2436f25a.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-00a9385a-d63d-4217-9690-82aa2436f25a.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:34:43</td>
+																		<td class='step-name'>Click on Search Button</td>
+																	<td class='step-details'>Expected: Employee details should be displayed in the Results Grid | Actual: Employee Details displayed successfully<a href="src/test/results/screenshot-93fb8465-b40b-4360-b2ee-0df6305475da.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-93fb8465-b40b-4360-b2ee-0df6305475da.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:34:48</td>
+																		<td class='step-name'>Click on Employee Last Name Hyperlink</td>
+																	<td class='step-details'>Expected: A popup should be displayed to enter date and Enrolling details | Actual: Popup displayed successfully<a href="src/test/results/screenshot-17b3ed69-0d61-4672-8216-2189af9eea5c.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-17b3ed69-0d61-4672-8216-2189af9eea5c.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:34:53</td>
+																		<td class='step-name'>Click on Ok on the Popup</td>
+																	<td class='step-details'>Expected: New Page should be displayed with Report a Life Event hyperlink | Actual: New Page displayed successfully with Report a Life Event Hyperlink<a href="src/test/results/screenshot-50cd2b6d-2551-4687-a2fe-65ab736e9075.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-50cd2b6d-2551-4687-a2fe-65ab736e9075.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:34:59</td>
+																		<td class='step-name'>Click on Report a Life Event Hyperlink</td>
+																	<td class='step-details'>Expected: Report a Life Event Pop-up should be displayed | Actual: Report a Life Event Pop-up displayed successfully<a href="src/test/results/screenshot-8e9f8cee-3a58-420f-a846-304827bca7c4.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-8e9f8cee-3a58-420f-a846-304827bca7c4.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:35:04</td>
+																		<td class='step-name'>Select Admin Correction from the dropdown and Current Date in the Pop-Up</td>
+																	<td class='step-details'>Expected: Admin Correction and Current Date in the Pop-Up should be selected | Actual: Admin Correction and Current Date in the Pop-Up selected successfully<a href="src/test/results/screenshot-4b9bc03d-bab9-436f-b497-fab61bdbf15d.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-4b9bc03d-bab9-436f-b497-fab61bdbf15d.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:35:13</td>
+																		<td class='step-name'>Click on Submit in the Pop-up</td>
+																	<td class='step-details'>Expected: New Page with Employee Confirmation Details should be displayed | Actual: New Page with Employee Confirmation Details displayed successfully<a href="src/test/results/screenshot-74b2a684-146c-40cb-88b1-4ce18e0b6cd2.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-74b2a684-146c-40cb-88b1-4ce18e0b6cd2.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:35:23</td>
+																		<td class='step-name'>Click on Submit</td>
+																	<td class='step-details'>Expected: New Page with Admin Correction Link should be displayed | Actual: New Page with Admin Correction link displayed successfully<a href="src/test/results/screenshot-0ccebd6c-176b-4ac2-a70f-926674b68fc9.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-0ccebd6c-176b-4ac2-a70f-926674b68fc9.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:35:30</td>
+																		<td class='step-name'>Click on Admin Correction Link</td>
+																	<td class='step-details'>Expected: Enrollments Page with Eligibility Summary link on the right should be displayed | Actual: Enrollments Page with Eligibility Summary link on the right should be displayed successfully<a href="src/test/results/screenshot-5bf66d47-e416-42b5-ab13-100776fe6414.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-5bf66d47-e416-42b5-ab13-100776fe6414.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:35:37</td>
+																		<td class='step-name'>Click on Admin Correction Link</td>
+																	<td class='step-details'>Expected: Enrollments Page with Eligibility Summary link on the right should be displayed | Actual: Enrollments Page with Eligibility Summary link on the right should be displayed successfully<a href="src/test/results/screenshot-bb0c8df0-baf9-4daa-a764-123f94512356.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-bb0c8df0-baf9-4daa-a764-123f94512356.png"></a></td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='35b89945-04a0-480b-9302-28291eb06234'>
+											<div class='test-head'>
+												<span class='test-name'>Report </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2017-09-21 11:01:54</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2017-09-21 11:03:32</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 1m 38s+0ms</span>
+												</div>
+												<div class='test-desc'>EligibilityStepFile report</div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																	<th>StepName</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:02:39</td>
+																		<td class='step-name'>Launch Vantage Home Page as Admin</td>
+																	<td class='step-details'>Expected: User should be able to navigate to Home Page | Actual: Vantage Home Page launched successfully<a href="src/test/results/screenshot-7711a7b2-22c8-42b6-93e1-335033c3d3d3.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-7711a7b2-22c8-42b6-93e1-335033c3d3d3.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:03:05</td>
+																		<td class='step-name'>Click on People from the Menu Bar</td>
+																	<td class='step-details'>Expected: People Menu should be displayed | Actual: People Menu is displayed successfully<a href="src/test/results/screenshot-21848714-7c85-43c0-a919-8bcfdfe5115f.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-21848714-7c85-43c0-a919-8bcfdfe5115f.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:03:10</td>
+																		<td class='step-name'>Click on Benefits from the list</td>
+																	<td class='step-details'>Expected: Benefits Sub Menu should be displayed | Actual: Benefits Sub Menu is displayed successfully<a href="src/test/results/screenshot-65ecf3dd-b1c8-4422-b5eb-e40199d51857.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-65ecf3dd-b1c8-4422-b5eb-e40199d51857.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:03:16</td>
+																		<td class='step-name'>Click on Life Events from the list</td>
+																	<td class='step-details'>Expected: Life Events should be clicked and Employee ID search page should be displayed | Actual: Employee ID search Page is displayed successfully<a href="src/test/results/screenshot-512de957-d9b5-49f5-9510-3d860f376bdc.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-512de957-d9b5-49f5-9510-3d860f376bdc.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:03:16</td>
+																		<td class='step-name'>Enter Employee ID in the TextBox</td>
+																	<td class='step-details'>Expected: Employee ID should be entered | Actual: Employee ID entered successfully<a href="src/test/results/screenshot-22117cf0-7444-4490-9569-ba39bde8bd90.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-22117cf0-7444-4490-9569-ba39bde8bd90.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:03:20</td>
+																		<td class='step-name'>Click on Search Button</td>
+																	<td class='step-details'>Expected: Employee details should be displayed in the Results Grid | Actual: Employee Details displayed successfully<a href="src/test/results/screenshot-323390fb-7ab1-404a-8088-762795d18384.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-323390fb-7ab1-404a-8088-762795d18384.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:03:25</td>
+																		<td class='step-name'>Click on Employee Last Name Hyperlink</td>
+																	<td class='step-details'>Expected: A popup should be displayed to enter date and Enrolling details | Actual: Popup displayed successfully<a href="src/test/results/screenshot-bc78bada-a0ce-47f8-907b-817af0d10c6f.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-bc78bada-a0ce-47f8-907b-817af0d10c6f.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:03:30</td>
+																		<td class='step-name'>Enter Current Date and select Enroll On behalf of Employee</td>
+																	<td class='step-details'>Expected: Current Date and Enroll On behalf of Employee should be selected | Actual: Current Date and Enroll On behalf of Employee selected successfully<a href="src/test/results/screenshot-b7592fb9-2630-4f71-a6a9-be42e27d8310.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-b7592fb9-2630-4f71-a6a9-be42e27d8310.png"></a></td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='21441267-4d51-454f-8f68-2aff5ec7b76d'>
+											<div class='test-head'>
+												<span class='test-name'>Report </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2017-09-21 10:47:26</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2017-09-21 10:48:49</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 1m 23s+0ms</span>
+												</div>
+												<div class='test-desc'>EligibilityStepFile report</div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																	<th>StepName</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:48:10</td>
+																		<td class='step-name'>Launch Vantage Home Page as Admin</td>
+																	<td class='step-details'>Expected: User should be able to navigate to Home Page | Actual: Vantage Home Page launched successfully<a href="src/test/results/screenshot-597abd6b-079b-40a8-8008-cf17d9322479.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-597abd6b-079b-40a8-8008-cf17d9322479.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:48:36</td>
+																		<td class='step-name'>Click on People from the Menu Bar</td>
+																	<td class='step-details'>Expected: People Menu should be displayed | Actual: People Menu is displayed successfully<a href="src/test/results/screenshot-a2e8d09a-ebe1-4633-a432-78ba04c1ddf3.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-a2e8d09a-ebe1-4633-a432-78ba04c1ddf3.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:48:41</td>
+																		<td class='step-name'>Click on Benefits from the list</td>
+																	<td class='step-details'>Expected: Benefits Sub Menu should be displayed | Actual: Benefits Sub Menu is displayed successfully<a href="src/test/results/screenshot-74405b89-4df2-4695-83d6-41643a7f1e94.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-74405b89-4df2-4695-83d6-41643a7f1e94.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:48:47</td>
+																		<td class='step-name'>Click on Life Events from the list</td>
+																	<td class='step-details'>Expected: Life Events should be clicked and Employee ID search page should be displayed | Actual: Employee ID search Page is displayed successfully<a href="src/test/results/screenshot-60f2b0e7-96f1-404d-8ca4-242ce5a68455.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-60f2b0e7-96f1-404d-8ca4-242ce5a68455.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:48:47</td>
+																		<td class='step-name'>Enter Employee ID in the TextBox</td>
+																	<td class='step-details'>Expected: Employee ID should be entered | Actual: Employee ID entered successfully<a href="src/test/results/screenshot-ec2941c5-cb01-45c3-b935-6e5141904650.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-ec2941c5-cb01-45c3-b935-6e5141904650.png"></a></td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='0794cfe3-7d44-42c7-a939-495d514290f5'>
+											<div class='test-head'>
+												<span class='test-name'>Report </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2017-09-21 10:34:01</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2017-09-21 10:35:18</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 1m 17s+0ms</span>
+												</div>
+												<div class='test-desc'>EligibilityStepFile report</div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																	<th>StepName</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:34:45</td>
+																		<td class='step-name'>Launch Vantage Home Page as Admin</td>
+																	<td class='step-details'>Expected: User should be able to navigate to Home Page | Actual: Vantage Home Page launched successfully<a href="src/test/results/screenshot-36aac102-052a-4e91-993d-ddd7fdfb8779.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-36aac102-052a-4e91-993d-ddd7fdfb8779.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:35:10</td>
+																		<td class='step-name'>Click on People from the Menu Bar</td>
+																	<td class='step-details'>Expected: People Menu should be displayed | Actual: People Menu is displayed successfully<a href="src/test/results/screenshot-e7fe282b-b08c-4d65-b4e5-0205b00c2f42.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-e7fe282b-b08c-4d65-b4e5-0205b00c2f42.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:35:16</td>
+																		<td class='step-name'>Click on Benefits from the Menu Bar</td>
+																	<td class='step-details'>Expected: People Menu should be displayed | Actual: People Menu is displayed successfully<a href="src/test/results/screenshot-7fd65904-33c8-4ea7-8f57-8cc187bc046a.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-7fd65904-33c8-4ea7-8f57-8cc187bc046a.png"></a></td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='c164ba8f-6cf4-4d4c-ab04-75901f7e8d1f'>
+											<div class='test-head'>
+												<span class='test-name'>Report </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2017-09-21 10:03:54</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2017-09-21 10:04:21</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 0m 27s+0ms</span>
+												</div>
+												<div class='test-desc'>EligibilityStepFile report</div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																	<th>StepName</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:04:19</td>
+																		<td class='step-name'>Launch Vantage Home Page as Admin</td>
+																	<td class='step-details'>Expected: User should be able to navigate to Home Page | Actual: Vantage Home Page launched successfully<a href="src/test/results/screenshot-67383b58-2399-4f3c-a356-82e4adbfb42d.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-67383b58-2399-4f3c-a356-82e4adbfb42d.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:04:19</td>
+																		<td class='step-name'>Click on People from the Menu Bar</td>
+																	<td class='step-details'>Expected: People Menu should be displayed | Actual: People Menu is displayed successfully<a href="src/test/results/screenshot-cc2e2de0-cfa5-446b-8bef-73858f59ff2d.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-cc2e2de0-cfa5-446b-8bef-73858f59ff2d.png"></a></td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='81bf2493-3732-4079-a1f9-a91ab4c9f29d'>
+											<div class='test-head'>
+												<span class='test-name'>Report </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2017-09-21 09:50:59</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2017-09-21 09:51:29</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 0m 30s+0ms</span>
+												</div>
+												<div class='test-desc'>EligibilityStepFile report</div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																	<th>StepName</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:51:17</td>
+																		<td class='step-name'>Launch Vantage Home Page as Admin</td>
+																	<td class='step-details'>Expected: User should be able to navigate to Home Page | Actual: Vantage Home Page launched successfully<a href="src/test/results/screenshot-c27ef32e-ae31-44c2-bb44-00558f19e6ad.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-c27ef32e-ae31-44c2-bb44-00558f19e6ad.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:51:27</td>
+																		<td class='step-name'>Click on People from the Menu Bar</td>
+																	<td class='step-details'>Expected: People Menu should be displayed | Actual: People Menu is displayed successfully<a href="src/test/results/screenshot-b12d8e93-cef3-4d6a-81b1-8011a05ec795.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-b12d8e93-cef3-4d6a-81b1-8011a05ec795.png"></a></td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='2e2a4158-c21c-4231-b174-ab42d8283345'>
+											<div class='test-head'>
+												<span class='test-name'>Report </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2017-09-20 19:17:25</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2017-09-20 19:17:42</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 0m 17s+0ms</span>
+												</div>
+												<div class='test-desc'>EligibilityStepFile report</div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																	<th>StepName</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>19:17:40</td>
+																		<td class='step-name'>Launch Sempra career site</td>
+																	<td class='step-details'>Expected: User should be able to launch Sempra Career site | Actual: Sempra Career site opened successfully<a href="src/test/results/screenshot-51d4773f-f332-4dcb-86d2-5e0db2e06049.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-51d4773f-f332-4dcb-86d2-5e0db2e06049.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>19:17:40</td>
+																		<td class='step-name'>Launch Sempra career site</td>
+																	<td class='step-details'>Expected: User should be able to launch Sempra Career site | Actual: Sempra Career site opened successfully<a href="src/test/results/screenshot-84d66c2f-ce73-47f4-bdd0-7b288f362b09.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-84d66c2f-ce73-47f4-bdd0-7b288f362b09.png"></a></td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active fail ' extentid='2fb9133a-7de8-45f0-8c58-536a2d3fa85a'>
+											<div class='test-head'>
+												<span class='test-name'>Report </span>
+												<span class='test-status label right outline capitalize fail'>fail</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2017-09-21 02:23:41</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2017-09-21 02:23:49</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 0m 8s+0ms</span>
+												</div>
+												<div class='test-desc'>EligibilityStepFile report</div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																	<th>StepName</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status fail' title='fail' alt='fail'><i class='mdi-navigation-cancel'></i></td>
+																	<td class='timestamp'>02:23:46</td>
+																		<td class='step-name'>Launch Sempra career site</td>
+																	<td class='step-details'>Expected: User should be able to launch Sempra Career site | Actual: Sempra Career site opened successfully<a href="src/test/results/screenshot-48a3ed91-b9cb-42a4-934f-4860ac1c939a.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-48a3ed91-b9cb-42a4-934f-4860ac1c939a.png"></a></td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active fail ' extentid='fdb8edd8-c661-4d24-b960-aeadda030e8b'>
+											<div class='test-head'>
+												<span class='test-name'>Report </span>
+												<span class='test-status label right outline capitalize fail'>fail</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2017-09-21 02:22:08</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2017-09-21 02:22:17</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 0m 9s+0ms</span>
+												</div>
+												<div class='test-desc'>EligibilityStepFile report</div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																	<th>StepName</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status fail' title='fail' alt='fail'><i class='mdi-navigation-cancel'></i></td>
+																	<td class='timestamp'>02:22:14</td>
+																		<td class='step-name'>Launch Sempra career site</td>
+																	<td class='step-details'>Expected: User should be able to launch Sempra Career site | Actual: Sempra Career site opened successfully<a href="src/test/results/screenshot-df528f96-3a7c-4b4b-b374-8920cb201150.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-df528f96-3a7c-4b4b-b374-8920cb201150.png"></a></td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active fail ' extentid='faf4bb71-b2b6-4157-94e3-05b1cae2dd79'>
+											<div class='test-head'>
+												<span class='test-name'>Report </span>
+												<span class='test-status label right outline capitalize fail'>fail</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2017-09-21 02:25:55</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2017-09-21 02:26:04</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 0m 9s+0ms</span>
+												</div>
+												<div class='test-desc'>EligibilityStepFile report</div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																	<th>StepName</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status fail' title='fail' alt='fail'><i class='mdi-navigation-cancel'></i></td>
+																	<td class='timestamp'>02:26:01</td>
+																		<td class='step-name'>Launch Sempra career site</td>
+																	<td class='step-details'>Expected: User should be able to launch Sempra Career site | Actual: Sempra Career site opened successfully<a href="src/test/results/screenshot-f54ed6f2-ba9f-413f-a0be-229040327674.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-f54ed6f2-ba9f-413f-a0be-229040327674.png"></a></td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='b342dc11-70e4-46ed-ab7c-59271a197335'>
+											<div class='test-head'>
+												<span class='test-name'>Report </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2017-09-21 09:44:07</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2017-09-21 09:44:24</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 0m 17s+0ms</span>
+												</div>
+												<div class='test-desc'>EligibilityStepFile report</div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																	<th>StepName</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:44:22</td>
+																		<td class='step-name'>Launch Vantage Home Page as Admin</td>
+																	<td class='step-details'>Expected: User should be able to navigate to Home Page | Actual: Vantage Home Page launched successfully<a href="src/test/results/screenshot-ce8ca03b-7629-457e-91ba-ffe2a4efc335.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-ce8ca03b-7629-457e-91ba-ffe2a4efc335.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:44:22</td>
+																		<td class='step-name'>Launch Sempra career site</td>
+																	<td class='step-details'>Expected: User should be able to launch Sempra Career site | Actual: Sempra Career site opened successfully<a href="src/test/results/screenshot-d0696088-0a49-4eea-9a1e-d534d2dd0c80.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-d0696088-0a49-4eea-9a1e-d534d2dd0c80.png"></a></td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='006b45de-d79d-464e-9283-02ebfd3171f3'>
+											<div class='test-head'>
+												<span class='test-name'>Report </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2017-09-21 09:54:41</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2017-09-21 09:55:08</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 0m 27s+0ms</span>
+												</div>
+												<div class='test-desc'>EligibilityStepFile report</div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																	<th>StepName</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:55:01</td>
+																		<td class='step-name'>Launch Vantage Home Page as Admin</td>
+																	<td class='step-details'>Expected: User should be able to navigate to Home Page | Actual: Vantage Home Page launched successfully<a href="src/test/results/screenshot-d7b3fe49-2eb1-4dde-a507-4e3c6f1d2c4f.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-d7b3fe49-2eb1-4dde-a507-4e3c6f1d2c4f.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:55:06</td>
+																		<td class='step-name'>Click on People from the Menu Bar</td>
+																	<td class='step-details'>Expected: People Menu should be displayed | Actual: People Menu is displayed successfully<a href="src/test/results/screenshot-482d1114-c8c4-462b-817a-17f5ef3882f9.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-482d1114-c8c4-462b-817a-17f5ef3882f9.png"></a></td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='43cf646c-b7da-454a-89b7-28c6e153d6bb'>
+											<div class='test-head'>
+												<span class='test-name'>Report </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2017-09-21 10:16:06</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2017-09-21 10:16:33</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 0m 27s+0ms</span>
+												</div>
+												<div class='test-desc'>EligibilityStepFile report</div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																	<th>StepName</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:16:30</td>
+																		<td class='step-name'>Launch Vantage Home Page as Admin</td>
+																	<td class='step-details'>Expected: User should be able to navigate to Home Page | Actual: Vantage Home Page launched successfully<a href="src/test/results/screenshot-0dd55daf-7fbe-44e8-8816-0fcc4fd32e01.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-0dd55daf-7fbe-44e8-8816-0fcc4fd32e01.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:16:31</td>
+																		<td class='step-name'>Click on People from the Menu Bar</td>
+																	<td class='step-details'>Expected: People Menu should be displayed | Actual: People Menu is displayed successfully<a href="src/test/results/screenshot-3c17dcdc-8799-4943-b2fa-1caff51230b0.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-3c17dcdc-8799-4943-b2fa-1caff51230b0.png"></a></td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='e4cb3e1c-0863-45c5-948e-54c5dccc4192'>
+											<div class='test-head'>
+												<span class='test-name'>Report </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2017-09-21 10:40:06</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2017-09-21 10:41:49</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 1m 43s+0ms</span>
+												</div>
+												<div class='test-desc'>EligibilityStepFile report</div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																	<th>StepName</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:41:11</td>
+																		<td class='step-name'>Launch Vantage Home Page as Admin</td>
+																	<td class='step-details'>Expected: User should be able to navigate to Home Page | Actual: Vantage Home Page launched successfully<a href="src/test/results/screenshot-7001fff7-bf54-4cb3-a035-6e48da32e1d9.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-7001fff7-bf54-4cb3-a035-6e48da32e1d9.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:41:36</td>
+																		<td class='step-name'>Click on People from the Menu Bar</td>
+																	<td class='step-details'>Expected: People Menu should be displayed | Actual: People Menu is displayed successfully<a href="src/test/results/screenshot-2061e9ea-76eb-487b-987c-4b7a35189899.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-2061e9ea-76eb-487b-987c-4b7a35189899.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:41:42</td>
+																		<td class='step-name'>Click on Benefits from the list</td>
+																	<td class='step-details'>Expected: Benefits Sub Menu should be displayed | Actual: Benefits Sub Menu is displayed successfully<a href="src/test/results/screenshot-b4972b56-9b31-4472-ad4f-c25ff8c60a4a.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-b4972b56-9b31-4472-ad4f-c25ff8c60a4a.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:41:47</td>
+																		<td class='step-name'>Click on Life Events from the list</td>
+																	<td class='step-details'>Expected: Life Events should be clicked and Employee ID search page should be displayed | Actual: Employee ID search Page is displayed successfully<a href="src/test/results/screenshot-92676e74-0513-4031-a027-d5c33dc02f76.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-92676e74-0513-4031-a027-d5c33dc02f76.png"></a></td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='c4ec44a3-d853-4a00-85f2-17e7df4b2da1'>
+											<div class='test-head'>
+												<span class='test-name'>Report </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2017-09-21 10:55:39</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2017-09-21 10:57:16</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 1m 37s+0ms</span>
+												</div>
+												<div class='test-desc'>EligibilityStepFile report</div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																	<th>StepName</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:56:23</td>
+																		<td class='step-name'>Launch Vantage Home Page as Admin</td>
+																	<td class='step-details'>Expected: User should be able to navigate to Home Page | Actual: Vantage Home Page launched successfully<a href="src/test/results/screenshot-24ea3249-b00e-4548-b635-c6fa2f1a1350.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-24ea3249-b00e-4548-b635-c6fa2f1a1350.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:56:48</td>
+																		<td class='step-name'>Click on People from the Menu Bar</td>
+																	<td class='step-details'>Expected: People Menu should be displayed | Actual: People Menu is displayed successfully<a href="src/test/results/screenshot-40d759f3-431e-4dd6-924e-d8a1fad05755.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-40d759f3-431e-4dd6-924e-d8a1fad05755.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:56:54</td>
+																		<td class='step-name'>Click on Benefits from the list</td>
+																	<td class='step-details'>Expected: Benefits Sub Menu should be displayed | Actual: Benefits Sub Menu is displayed successfully<a href="src/test/results/screenshot-2022b91c-c997-409c-8492-89552189c073.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-2022b91c-c997-409c-8492-89552189c073.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:56:59</td>
+																		<td class='step-name'>Click on Life Events from the list</td>
+																	<td class='step-details'>Expected: Life Events should be clicked and Employee ID search page should be displayed | Actual: Employee ID search Page is displayed successfully<a href="src/test/results/screenshot-af54d6e4-5fa8-4f82-aca3-48e8ca92123f.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-af54d6e4-5fa8-4f82-aca3-48e8ca92123f.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:57:00</td>
+																		<td class='step-name'>Enter Employee ID in the TextBox</td>
+																	<td class='step-details'>Expected: Employee ID should be entered | Actual: Employee ID entered successfully<a href="src/test/results/screenshot-da600690-364e-4acf-bba1-86b9c7042c6a.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-da600690-364e-4acf-bba1-86b9c7042c6a.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:57:03</td>
+																		<td class='step-name'>Click on Search Button</td>
+																	<td class='step-details'>Expected: Employee details should be displayed in the Results Grid | Actual: Employee Details displayed successfully<a href="src/test/results/screenshot-7bd7ff4e-8d70-41fa-b55b-9c929faf316c.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-7bd7ff4e-8d70-41fa-b55b-9c929faf316c.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:57:06</td>
+																		<td class='step-name'>Click on Employee Last Name Hyperlink</td>
+																	<td class='step-details'>Expected: A popup should be displayed to enter date and Enrolling details | Actual: Popup displayed successfully<a href="src/test/results/screenshot-1b7ec9c1-5350-40cd-b10c-f12f689a48d6.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-1b7ec9c1-5350-40cd-b10c-f12f689a48d6.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>10:57:14</td>
+																		<td class='step-name'>Enter Current Date and select Enroll On behalf of Employee</td>
+																	<td class='step-details'>Expected: Current Date and Enroll On behalf of Employee should be selected | Actual: Current Date and Enroll On behalf of Employee selected successfully<a href="src/test/results/screenshot-4666cdfd-64f9-4cc4-8994-f88460aace32.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-4666cdfd-64f9-4cc4-8994-f88460aace32.png"></a></td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='ed48594a-7ff8-45c4-8b37-0a27b1b5ff05'>
+											<div class='test-head'>
+												<span class='test-name'>Report </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2017-09-21 11:16:46</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2017-09-21 11:18:59</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 2m 13s+0ms</span>
+												</div>
+												<div class='test-desc'>EligibilityStepFile report</div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																	<th>StepName</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:17:31</td>
+																		<td class='step-name'>Launch Vantage Home Page as Admin</td>
+																	<td class='step-details'>Expected: User should be able to navigate to Home Page | Actual: Vantage Home Page launched successfully<a href="src/test/results/screenshot-42d65fbb-69b0-4e79-9f7f-079cc3c86bb1.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-42d65fbb-69b0-4e79-9f7f-079cc3c86bb1.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:17:56</td>
+																		<td class='step-name'>Click on People from the Menu Bar</td>
+																	<td class='step-details'>Expected: People Menu should be displayed | Actual: People Menu is displayed successfully<a href="src/test/results/screenshot-abb701b5-07fd-4635-933a-fe3f7106c573.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-abb701b5-07fd-4635-933a-fe3f7106c573.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:18:02</td>
+																		<td class='step-name'>Click on Benefits from the list</td>
+																	<td class='step-details'>Expected: Benefits Sub Menu should be displayed | Actual: Benefits Sub Menu is displayed successfully<a href="src/test/results/screenshot-bae8862f-e79f-4e21-a8c1-9945f7bc28df.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-bae8862f-e79f-4e21-a8c1-9945f7bc28df.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:18:08</td>
+																		<td class='step-name'>Click on Life Events from the list</td>
+																	<td class='step-details'>Expected: Life Events should be clicked and Employee ID search page should be displayed | Actual: Employee ID search Page is displayed successfully<a href="src/test/results/screenshot-e418fcdc-71bb-4ed0-b536-61632b047fdf.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-e418fcdc-71bb-4ed0-b536-61632b047fdf.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:18:08</td>
+																		<td class='step-name'>Enter Employee ID in the TextBox</td>
+																	<td class='step-details'>Expected: Employee ID should be entered | Actual: Employee ID entered successfully<a href="src/test/results/screenshot-8283e365-0db1-4fe5-a992-a5b9d21654dc.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-8283e365-0db1-4fe5-a992-a5b9d21654dc.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:18:12</td>
+																		<td class='step-name'>Click on Search Button</td>
+																	<td class='step-details'>Expected: Employee details should be displayed in the Results Grid | Actual: Employee Details displayed successfully<a href="src/test/results/screenshot-ba6e44f2-f7fa-471e-9c41-008b4759fefb.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-ba6e44f2-f7fa-471e-9c41-008b4759fefb.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:18:17</td>
+																		<td class='step-name'>Click on Employee Last Name Hyperlink</td>
+																	<td class='step-details'>Expected: A popup should be displayed to enter date and Enrolling details | Actual: Popup displayed successfully<a href="src/test/results/screenshot-d003ecb1-c7c7-49db-b4e5-a42502562e38.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-d003ecb1-c7c7-49db-b4e5-a42502562e38.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:18:24</td>
+																		<td class='step-name'>Click on Ok on the Popup</td>
+																	<td class='step-details'>Expected: New Page should be displayed with Report a Life Event hyperlink | Actual: New Page displayed successfully with Report a Life Event Hyperlink<a href="src/test/results/screenshot-f9b76028-205d-459f-ad12-649b082b2eb8.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-f9b76028-205d-459f-ad12-649b082b2eb8.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:18:31</td>
+																		<td class='step-name'>Click on Report a Life Event Hyperlink</td>
+																	<td class='step-details'>Expected: Report a Life Event Pop-up should be displayed | Actual: Report a Life Event Pop-up displayed successfully<a href="src/test/results/screenshot-867a1ea5-86f7-4605-afe7-580875007a09.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-867a1ea5-86f7-4605-afe7-580875007a09.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:18:35</td>
+																		<td class='step-name'>Select Admin Correction and Current Date in the Pop-Up</td>
+																	<td class='step-details'>Expected: Admin Correction and Current Date in the Pop-Up should be selected | Actual: Admin Correction and Current Date in the Pop-Up selected successfully<a href="src/test/results/screenshot-53b4aacd-ed44-4e47-8e57-218e802751e2.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-53b4aacd-ed44-4e47-8e57-218e802751e2.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:18:44</td>
+																		<td class='step-name'>Click on Submit in the Pop-up</td>
+																	<td class='step-details'>Expected: New Page with Admin Correction link should be displayed | Actual: New Page with Admin Correction link displayed successfully<a href="src/test/results/screenshot-64b4ec0f-28e2-4b34-abc9-71452bcee3a7.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-64b4ec0f-28e2-4b34-abc9-71452bcee3a7.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:18:57</td>
+																		<td class='step-name'>Click on Submit</td>
+																	<td class='step-details'>Expected: Enrollments Page should be displayed with Eligibility Summary link on the right | Actual: Enrollments Page with Eligibility Summary link displayed successfully<a href="src/test/results/screenshot-7e5b46c0-128b-44eb-907c-57a2a4ed1509.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-7e5b46c0-128b-44eb-907c-57a2a4ed1509.png"></a></td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='46cea00d-c943-43ce-beca-9445a9a2de07'>
+											<div class='test-head'>
+												<span class='test-name'>Report </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2017-09-21 11:42:08</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2017-09-21 11:44:33</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 2m 25s+0ms</span>
+												</div>
+												<div class='test-desc'>EligibilityStepFile report</div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																	<th>StepName</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:42:53</td>
+																		<td class='step-name'>Launch Vantage Home Page as Admin</td>
+																	<td class='step-details'>Expected: User should be able to navigate to Home Page | Actual: Vantage Home Page launched successfully<a href="src/test/results/screenshot-fd2953ad-c2f4-4c62-a6b8-42e2e24ae286.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-fd2953ad-c2f4-4c62-a6b8-42e2e24ae286.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:43:18</td>
+																		<td class='step-name'>Click on People from the Menu Bar</td>
+																	<td class='step-details'>Expected: People Menu should be displayed | Actual: People Menu is displayed successfully<a href="src/test/results/screenshot-a62f343f-105a-4a2c-9454-c57800ad6adb.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-a62f343f-105a-4a2c-9454-c57800ad6adb.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:43:24</td>
+																		<td class='step-name'>Click on Benefits from the list</td>
+																	<td class='step-details'>Expected: Benefits Sub Menu should be displayed | Actual: Benefits Sub Menu is displayed successfully<a href="src/test/results/screenshot-cb77ee7f-1e80-44fa-a063-a5af8c95ab72.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-cb77ee7f-1e80-44fa-a063-a5af8c95ab72.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:43:29</td>
+																		<td class='step-name'>Click on Life Events from the list</td>
+																	<td class='step-details'>Expected: Life Events should be clicked and Employee ID search page should be displayed | Actual: Employee ID search Page is displayed successfully<a href="src/test/results/screenshot-1213b18c-f4fd-48c1-8024-c620c258bb7c.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-1213b18c-f4fd-48c1-8024-c620c258bb7c.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:43:30</td>
+																		<td class='step-name'>Enter Employee ID in the TextBox</td>
+																	<td class='step-details'>Expected: Employee ID should be entered | Actual: Employee ID entered successfully<a href="src/test/results/screenshot-24480f9e-17ce-4a77-bf4c-4d645400f57a.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-24480f9e-17ce-4a77-bf4c-4d645400f57a.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:43:35</td>
+																		<td class='step-name'>Click on Search Button</td>
+																	<td class='step-details'>Expected: Employee details should be displayed in the Results Grid | Actual: Employee Details displayed successfully<a href="src/test/results/screenshot-6749a15a-a876-46b3-9e27-373c82bd5a24.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-6749a15a-a876-46b3-9e27-373c82bd5a24.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:43:41</td>
+																		<td class='step-name'>Click on Employee Last Name Hyperlink</td>
+																	<td class='step-details'>Expected: A popup should be displayed to enter date and Enrolling details | Actual: Popup displayed successfully<a href="src/test/results/screenshot-8e2013d8-3518-441a-8fd8-a6c1ec1bd3a5.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-8e2013d8-3518-441a-8fd8-a6c1ec1bd3a5.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:43:46</td>
+																		<td class='step-name'>Click on Ok on the Popup</td>
+																	<td class='step-details'>Expected: New Page should be displayed with Report a Life Event hyperlink | Actual: New Page displayed successfully with Report a Life Event Hyperlink<a href="src/test/results/screenshot-ff46a1c5-fa7c-49b1-9b41-bc3f77f7fc2a.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-ff46a1c5-fa7c-49b1-9b41-bc3f77f7fc2a.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:43:52</td>
+																		<td class='step-name'>Click on Report a Life Event Hyperlink</td>
+																	<td class='step-details'>Expected: Report a Life Event Pop-up should be displayed | Actual: Report a Life Event Pop-up displayed successfully<a href="src/test/results/screenshot-ff98f418-ae39-40b3-8470-049e3b6b0545.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-ff98f418-ae39-40b3-8470-049e3b6b0545.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:43:57</td>
+																		<td class='step-name'>Select Admin Correction from the dropdown and Current Date in the Pop-Up</td>
+																	<td class='step-details'>Expected: Admin Correction and Current Date in the Pop-Up should be selected | Actual: Admin Correction and Current Date in the Pop-Up selected successfully<a href="src/test/results/screenshot-1fc7efa9-7c9c-48fd-8f31-1b6fd69296bd.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-1fc7efa9-7c9c-48fd-8f31-1b6fd69296bd.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:44:05</td>
+																		<td class='step-name'>Click on Submit in the Pop-up</td>
+																	<td class='step-details'>Expected: New Page with Employee Confirmation Details should be displayed | Actual: New Page with Employee Confirmation Details displayed successfully<a href="src/test/results/screenshot-a02ad0f4-8089-4d41-949e-f4df9458928b.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-a02ad0f4-8089-4d41-949e-f4df9458928b.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:44:17</td>
+																		<td class='step-name'>Click on Submit</td>
+																	<td class='step-details'>Expected: New Page with Admin Correction Link should be displayed | Actual: New Page with Admin Correction link displayed successfully<a href="src/test/results/screenshot-a780a852-c3a3-4225-b73d-8f06f46c1a92.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-a780a852-c3a3-4225-b73d-8f06f46c1a92.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:44:24</td>
+																		<td class='step-name'>Click on Admin Correction Link</td>
+																	<td class='step-details'>Expected: Enrollments Page with Eligibility Summary link on the right should be displayed | Actual: Enrollments Page with Eligibility Summary link on the right should be displayed successfully<a href="src/test/results/screenshot-07b11707-4374-47ea-9a52-cca83e77ab71.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-07b11707-4374-47ea-9a52-cca83e77ab71.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:44:31</td>
+																		<td class='step-name'>Click on Eligibiliy Summary Link</td>
+																	<td class='step-details'>Expected: Enrollments Page with Eligibility Summary link on the right should be displayed | Actual: Enrollments Page with Eligibility Summary link on the right should be displayed successfully<a href="src/test/results/screenshot-3a620b69-9372-4861-b12f-71218dace086.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-3a620b69-9372-4861-b12f-71218dace086.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>11:44:31</td>
+																		<td class='step-name'>Verify if the Eligibility Summary Opens in a new web page</td>
+																	<td class='step-details'>Expected: Eligibility Summary of the Employee should be opened in a new web page | Actual: Eligibility Summary of the Employee Opens in a new web page successfully<a href="src/test/results/screenshot-0649be24-9d28-4cf2-bca5-a671051c4938.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-0649be24-9d28-4cf2-bca5-a671051c4938.png"></a></td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='304d8c2c-45f3-4fd0-9846-aa724d6e4b68'>
+											<div class='test-head'>
+												<span class='test-name'>Report </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2017-09-21 12:02:23</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2017-09-21 12:04:59</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 2m 36s+0ms</span>
+												</div>
+												<div class='test-desc'>EligibilityStepFile report</div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																	<th>StepName</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:03:07</td>
+																		<td class='step-name'>Launch Vantage Home Page as Admin</td>
+																	<td class='step-details'>Expected: User should be able to navigate to Home Page | Actual: Vantage Home Page launched successfully<a href="src/test/results/screenshot-4ff24fb9-0bc0-4f58-8e53-7e91955526f9.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-4ff24fb9-0bc0-4f58-8e53-7e91955526f9.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:03:32</td>
+																		<td class='step-name'>Click on People from the Menu Bar</td>
+																	<td class='step-details'>Expected: People Menu should be displayed | Actual: People Menu is displayed successfully<a href="src/test/results/screenshot-0a5073a2-4b3b-4272-b0c9-ec3730df74bb.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-0a5073a2-4b3b-4272-b0c9-ec3730df74bb.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:03:38</td>
+																		<td class='step-name'>Click on Benefits from the list</td>
+																	<td class='step-details'>Expected: Benefits Sub Menu should be displayed | Actual: Benefits Sub Menu is displayed successfully<a href="src/test/results/screenshot-faa1d310-4719-4f99-9b3d-83f42934fa0d.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-faa1d310-4719-4f99-9b3d-83f42934fa0d.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:03:43</td>
+																		<td class='step-name'>Click on Life Events from the list</td>
+																	<td class='step-details'>Expected: Life Events should be clicked and Employee ID search page should be displayed | Actual: Employee ID search Page is displayed successfully<a href="src/test/results/screenshot-67fac977-509a-4820-8fb1-970247cecaac.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-67fac977-509a-4820-8fb1-970247cecaac.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:03:44</td>
+																		<td class='step-name'>Enter Employee ID in the TextBox</td>
+																	<td class='step-details'>Expected: Employee ID should be entered | Actual: Employee ID entered successfully<a href="src/test/results/screenshot-2930b1b7-0f85-4e44-9ae1-ffb7d850c2a7.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-2930b1b7-0f85-4e44-9ae1-ffb7d850c2a7.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:03:49</td>
+																		<td class='step-name'>Click on Search Button</td>
+																	<td class='step-details'>Expected: Employee details should be displayed in the Results Grid | Actual: Employee Details displayed successfully<a href="src/test/results/screenshot-ff8ce8d8-3a4c-4506-be62-8b04b69da48c.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-ff8ce8d8-3a4c-4506-be62-8b04b69da48c.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:03:55</td>
+																		<td class='step-name'>Click on Employee Last Name Hyperlink</td>
+																	<td class='step-details'>Expected: A popup should be displayed to enter date and Enrolling details | Actual: Popup displayed successfully<a href="src/test/results/screenshot-8cadd30a-c2f4-49b8-9e5e-87be6c884fb3.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-8cadd30a-c2f4-49b8-9e5e-87be6c884fb3.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:04:02</td>
+																		<td class='step-name'>Click on Ok on the Popup</td>
+																	<td class='step-details'>Expected: New Page should be displayed with Report a Life Event hyperlink | Actual: New Page displayed successfully with Report a Life Event Hyperlink<a href="src/test/results/screenshot-e043165c-881f-434b-9d1d-81e0380dad7b.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-e043165c-881f-434b-9d1d-81e0380dad7b.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:04:08</td>
+																		<td class='step-name'>Click on Report a Life Event Hyperlink</td>
+																	<td class='step-details'>Expected: Report a Life Event Pop-up should be displayed | Actual: Report a Life Event Pop-up displayed successfully<a href="src/test/results/screenshot-8b1b2f59-3fd1-47c5-aad4-b77ce82cc1fd.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-8b1b2f59-3fd1-47c5-aad4-b77ce82cc1fd.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:04:13</td>
+																		<td class='step-name'>Select Admin Correction from the dropdown and Current Date in the Pop-Up</td>
+																	<td class='step-details'>Expected: Admin Correction and Current Date in the Pop-Up should be selected | Actual: Admin Correction and Current Date in the Pop-Up selected successfully<a href="src/test/results/screenshot-a3924292-0601-45ec-9846-5c215855519b.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-a3924292-0601-45ec-9846-5c215855519b.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:04:22</td>
+																		<td class='step-name'>Click on Submit in the Pop-up</td>
+																	<td class='step-details'>Expected: New Page with Employee Confirmation Details should be displayed | Actual: New Page with Employee Confirmation Details displayed successfully<a href="src/test/results/screenshot-cb841a66-0099-4eed-87f6-0bb07d0064c8.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-cb841a66-0099-4eed-87f6-0bb07d0064c8.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:04:40</td>
+																		<td class='step-name'>Click on Submit</td>
+																	<td class='step-details'>Expected: New Page with Admin Correction Link should be displayed | Actual: New Page with Admin Correction link displayed successfully<a href="src/test/results/screenshot-77711548-70fe-4a5e-b78f-9da3938d46b9.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-77711548-70fe-4a5e-b78f-9da3938d46b9.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:04:45</td>
+																		<td class='step-name'>Click on Admin Correction Link</td>
+																	<td class='step-details'>Expected: Enrollments Page with Eligibility Summary link on the right should be displayed | Actual: Enrollments Page with Eligibility Summary link on the right should be displayed successfully<a href="src/test/results/screenshot-4d0547b1-b5e6-410b-ad2d-d96e7ce58f96.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-4d0547b1-b5e6-410b-ad2d-d96e7ce58f96.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:04:57</td>
+																		<td class='step-name'>Verify if the Eligibility Summary Opens in a new web page</td>
+																	<td class='step-details'>Expected: Eligibility Summary of the Employee should be opened in a new web page | Actual: Eligibility Summary of the Employee Opens in a new web page successfully<a href="src/test/results/screenshot-71c62d8b-12a4-4595-9b49-c3d90456f7cc.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-71c62d8b-12a4-4595-9b49-c3d90456f7cc.png"></a></td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='34f48726-2e25-4f41-ad06-ee863a9c71ae'>
+											<div class='test-head'>
+												<span class='test-name'>Report </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2017-09-21 12:22:59</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2017-09-21 12:25:44</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 2m 45s+0ms</span>
+												</div>
+												<div class='test-desc'>EligibilityStepFile report</div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																	<th>StepName</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:23:49</td>
+																		<td class='step-name'>Launch Vantage Home Page as Admin</td>
+																	<td class='step-details'>Expected: User should be able to navigate to Home Page | Actual: Vantage Home Page launched successfully<a href="src/test/results/screenshot-45fa912c-dbe8-4742-9d43-910f7969b1dc.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-45fa912c-dbe8-4742-9d43-910f7969b1dc.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:24:14</td>
+																		<td class='step-name'>Click on People from the Menu Bar</td>
+																	<td class='step-details'>Expected: People Menu should be displayed | Actual: People Menu is displayed successfully<a href="src/test/results/screenshot-47263e54-cbbe-4390-a8d7-f4a17be7d8e6.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-47263e54-cbbe-4390-a8d7-f4a17be7d8e6.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:24:20</td>
+																		<td class='step-name'>Click on Benefits from the list</td>
+																	<td class='step-details'>Expected: Benefits Sub Menu should be displayed | Actual: Benefits Sub Menu is displayed successfully<a href="src/test/results/screenshot-859c27a2-1bb7-47aa-9a42-ed86972e1950.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-859c27a2-1bb7-47aa-9a42-ed86972e1950.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:24:26</td>
+																		<td class='step-name'>Click on Life Events from the list</td>
+																	<td class='step-details'>Expected: Life Events should be clicked and Employee ID search page should be displayed | Actual: Employee ID search Page is displayed successfully<a href="src/test/results/screenshot-a47480ca-d947-4c8b-9f53-ade6ded689d6.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-a47480ca-d947-4c8b-9f53-ade6ded689d6.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:24:26</td>
+																		<td class='step-name'>Enter Employee ID in the TextBox</td>
+																	<td class='step-details'>Expected: Employee ID should be entered | Actual: Employee ID entered successfully<a href="src/test/results/screenshot-c3da4a7e-ab9e-4a3e-bdb4-51115465825e.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-c3da4a7e-ab9e-4a3e-bdb4-51115465825e.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:24:31</td>
+																		<td class='step-name'>Click on Search Button</td>
+																	<td class='step-details'>Expected: Employee details should be displayed in the Results Grid | Actual: Employee Details displayed successfully<a href="src/test/results/screenshot-a98d4504-ba1a-4ad5-a329-fd8bfeb314da.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-a98d4504-ba1a-4ad5-a329-fd8bfeb314da.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:24:37</td>
+																		<td class='step-name'>Click on Employee Last Name Hyperlink</td>
+																	<td class='step-details'>Expected: A popup should be displayed to enter date and Enrolling details | Actual: Popup displayed successfully<a href="src/test/results/screenshot-10a50435-4f2b-4b8f-980d-b08e9a1b3401.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-10a50435-4f2b-4b8f-980d-b08e9a1b3401.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:24:44</td>
+																		<td class='step-name'>Click on Ok on the Popup</td>
+																	<td class='step-details'>Expected: New Page should be displayed with Report a Life Event hyperlink | Actual: New Page displayed successfully with Report a Life Event Hyperlink<a href="src/test/results/screenshot-49183269-ba5c-4e63-8d59-71e1ec0ce187.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-49183269-ba5c-4e63-8d59-71e1ec0ce187.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:24:51</td>
+																		<td class='step-name'>Click on Report a Life Event Hyperlink</td>
+																	<td class='step-details'>Expected: Report a Life Event Pop-up should be displayed | Actual: Report a Life Event Pop-up displayed successfully<a href="src/test/results/screenshot-7b9cf1be-50fd-4c3f-88e0-e437787718d8.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-7b9cf1be-50fd-4c3f-88e0-e437787718d8.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:24:55</td>
+																		<td class='step-name'>Select Admin Correction from the dropdown and Current Date in the Pop-Up</td>
+																	<td class='step-details'>Expected: Admin Correction and Current Date in the Pop-Up should be selected | Actual: Admin Correction and Current Date in the Pop-Up selected successfully<a href="src/test/results/screenshot-35829ea4-cc02-4054-b38c-66553fa7c53b.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-35829ea4-cc02-4054-b38c-66553fa7c53b.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:25:04</td>
+																		<td class='step-name'>Click on Submit in the Pop-up</td>
+																	<td class='step-details'>Expected: New Page with Employee Confirmation Details should be displayed | Actual: New Page with Employee Confirmation Details displayed successfully<a href="src/test/results/screenshot-23f60a16-e3ce-43d2-9323-6b6e0c8372e6.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-23f60a16-e3ce-43d2-9323-6b6e0c8372e6.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:25:21</td>
+																		<td class='step-name'>Click on Submit</td>
+																	<td class='step-details'>Expected: New Page with Admin Correction Link should be displayed | Actual: New Page with Admin Correction link displayed successfully<a href="src/test/results/screenshot-d859628b-360c-4933-996f-711cf51c8abd.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-d859628b-360c-4933-996f-711cf51c8abd.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:25:28</td>
+																		<td class='step-name'>Click on Admin Correction Link</td>
+																	<td class='step-details'>Expected: Enrollments Page with Eligibility Summary link on the right should be displayed | Actual: Enrollments Page with Eligibility Summary link on the right should be displayed successfully<a href="src/test/results/screenshot-8d2d08f6-fc54-420b-bb84-d1f46ac8e661.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-8d2d08f6-fc54-420b-bb84-d1f46ac8e661.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>12:25:42</td>
+																		<td class='step-name'>Verify if the Eligibility Summary Opens in a new web page</td>
+																	<td class='step-details'>Expected: Eligibility Summary of the Employee should be opened in a new web page | Actual: Eligibility Summary of the Employee Opens in a new web page successfully<a href="src/test/results/screenshot-b1e21f7c-0e9c-47dd-a4c2-18e6c953e347.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-b1e21f7c-0e9c-47dd-a4c2-18e6c953e347.png"></a></td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='4df1a71a-e131-4eea-9212-bf0ab9c82d46'>
+											<div class='test-head'>
+												<span class='test-name'>Report </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2017-09-22 09:00:00</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2017-09-22 09:05:43</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 5m 43s+0ms</span>
+												</div>
+												<div class='test-desc'>EligibilityStepFile report</div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																	<th>StepName</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:00:45</td>
+																		<td class='step-name'>Launch Vantage Home Page as Admin</td>
+																	<td class='step-details'>Expected: User should be able to navigate to Home Page | Actual: Vantage Home Page launched successfully<a href="src/test/results/screenshot-6156ea53-d660-49c1-a323-ab39cde98bc3.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-6156ea53-d660-49c1-a323-ab39cde98bc3.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:00:45</td>
+																		<td class='step-name'>Click on People from the Menu Bar</td>
+																	<td class='step-details'>Expected: People Menu should be displayed | Actual: People Menu is displayed successfully<a href="src/test/results/screenshot-4a86e9db-5b52-481e-b8ab-2b083d916399.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-4a86e9db-5b52-481e-b8ab-2b083d916399.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:00:51</td>
+																		<td class='step-name'>Click on Benefits from the list</td>
+																	<td class='step-details'>Expected: Benefits Sub Menu should be displayed | Actual: Benefits Sub Menu is displayed successfully<a href="src/test/results/screenshot-f452e9f3-a542-4845-8699-071ef12e298d.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-f452e9f3-a542-4845-8699-071ef12e298d.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:00:56</td>
+																		<td class='step-name'>Click on Life Events from the list</td>
+																	<td class='step-details'>Expected: Life Events should be clicked and Employee ID search page should be displayed | Actual: Employee ID search Page is displayed successfully<a href="src/test/results/screenshot-29494e6b-3291-4aed-a3ef-7606aca469c8.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-29494e6b-3291-4aed-a3ef-7606aca469c8.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:00:57</td>
+																		<td class='step-name'>Enter Employee ID in the TextBox</td>
+																	<td class='step-details'>Expected: Employee ID should be entered | Actual: Employee ID entered successfully<a href="src/test/results/screenshot-efac645c-6106-4c3c-9570-ca89b0953ee1.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-efac645c-6106-4c3c-9570-ca89b0953ee1.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:01:02</td>
+																		<td class='step-name'>Click on Search Button</td>
+																	<td class='step-details'>Expected: Employee details should be displayed in the Results Grid | Actual: Employee Details displayed successfully<a href="src/test/results/screenshot-296a51c5-e130-413e-939e-cd1c296368c7.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-296a51c5-e130-413e-939e-cd1c296368c7.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:01:08</td>
+																		<td class='step-name'>Click on Employee Last Name Hyperlink</td>
+																	<td class='step-details'>Expected: A popup should be displayed to enter date and Enrolling details | Actual: Popup displayed successfully<a href="src/test/results/screenshot-b6600374-1d23-4283-981c-fad76fb03cc5.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-b6600374-1d23-4283-981c-fad76fb03cc5.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:01:15</td>
+																		<td class='step-name'>Click on Ok on the Popup</td>
+																	<td class='step-details'>Expected: New Page should be displayed with Report a Life Event hyperlink | Actual: New Page displayed successfully with Report a Life Event Hyperlink<a href="src/test/results/screenshot-978d7e11-d1d0-4632-b8d6-0e28b2ae509e.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-978d7e11-d1d0-4632-b8d6-0e28b2ae509e.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:01:21</td>
+																		<td class='step-name'>Click on Report a Life Event Hyperlink</td>
+																	<td class='step-details'>Expected: Report a Life Event Pop-up should be displayed | Actual: Report a Life Event Pop-up displayed successfully<a href="src/test/results/screenshot-5aaa1ce5-84c0-4444-86ee-e1a6c4350efa.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-5aaa1ce5-84c0-4444-86ee-e1a6c4350efa.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:01:26</td>
+																		<td class='step-name'>Select Admin Correction from the dropdown and Current Date in the Pop-Up</td>
+																	<td class='step-details'>Expected: Admin Correction and Current Date in the Pop-Up should be selected | Actual: Admin Correction and Current Date in the Pop-Up selected successfully<a href="src/test/results/screenshot-7d72a562-6498-4e1a-a032-0567391e6ae2.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-7d72a562-6498-4e1a-a032-0567391e6ae2.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:01:35</td>
+																		<td class='step-name'>Click on Submit in the Pop-up</td>
+																	<td class='step-details'>Expected: New Page with Employee Confirmation Details should be displayed | Actual: New Page with Employee Confirmation Details displayed successfully<a href="src/test/results/screenshot-18b9928c-e8b1-4ea5-a5b8-491de593fa3a.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-18b9928c-e8b1-4ea5-a5b8-491de593fa3a.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:05:19</td>
+																		<td class='step-name'>Click on Submit</td>
+																	<td class='step-details'>Expected: New Page with Admin Correction Link should be displayed | Actual: New Page with Admin Correction link displayed successfully<a href="src/test/results/screenshot-b0908f68-535f-4f38-a5d9-9f9ad7f9e69e.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-b0908f68-535f-4f38-a5d9-9f9ad7f9e69e.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:05:25</td>
+																		<td class='step-name'>Click on Admin Correction Link</td>
+																	<td class='step-details'>Expected: Enrollments Page with Eligibility Summary link on the right should be displayed | Actual: Enrollments Page with Eligibility Summary link on the right should be displayed successfully<a href="src/test/results/screenshot-c8df5996-d2ff-403a-84dd-7313e1c6ff97.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-c8df5996-d2ff-403a-84dd-7313e1c6ff97.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:05:41</td>
+																		<td class='step-name'>Verify if the Eligibility Summary Opens in a new web page</td>
+																	<td class='step-details'>Expected: Eligibility Summary of the Employee should be opened in a new web page | Actual: Eligibility Summary of the Employee Opens in a new web page successfully<a href="src/test/results/screenshot-f1130943-ff0f-4799-ac7d-f8e691816eed.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-f1130943-ff0f-4799-ac7d-f8e691816eed.png"></a></td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active pass ' extentid='a56a4c33-8728-4966-92b3-ee446a60367c'>
+											<div class='test-head'>
+												<span class='test-name'>Report </span>
+												<span class='test-status label right outline capitalize pass'>pass</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2017-09-22 09:41:29</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'>2017-09-22 09:48:06</span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'>0h 6m 37s+0ms</span>
+												</div>
+												<div class='test-desc'>EligibilityStepFile report</div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																	<th>StepName</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:42:30</td>
+																		<td class='step-name'>Launch Vantage Home Page as Admin</td>
+																	<td class='step-details'>Expected: User should be able to navigate to Home Page | Actual: Vantage Home Page launched successfully<a href="src/test/results/screenshot-bebfef6b-1ac5-4142-8fc1-4af32536f528.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-bebfef6b-1ac5-4142-8fc1-4af32536f528.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:42:30</td>
+																		<td class='step-name'>Click on People from the Menu Bar</td>
+																	<td class='step-details'>Expected: People Menu should be displayed | Actual: People Menu is displayed successfully<a href="src/test/results/screenshot-0e8900e4-5fbf-44d5-886d-f94335ba0f84.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-0e8900e4-5fbf-44d5-886d-f94335ba0f84.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:42:36</td>
+																		<td class='step-name'>Click on Benefits from the list</td>
+																	<td class='step-details'>Expected: Benefits Sub Menu should be displayed | Actual: Benefits Sub Menu is displayed successfully<a href="src/test/results/screenshot-e850393d-ca86-47a2-b2c7-e30c5767aa0d.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-e850393d-ca86-47a2-b2c7-e30c5767aa0d.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:42:42</td>
+																		<td class='step-name'>Click on Life Events from the list</td>
+																	<td class='step-details'>Expected: Life Events should be clicked and Employee ID search page should be displayed | Actual: Employee ID search Page is displayed successfully<a href="src/test/results/screenshot-5e54b6d0-4006-442d-b9dc-6c9e1596c0d7.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-5e54b6d0-4006-442d-b9dc-6c9e1596c0d7.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:42:42</td>
+																		<td class='step-name'>Enter Employee ID in the TextBox</td>
+																	<td class='step-details'>Expected: Employee ID should be entered | Actual: Employee ID entered successfully<a href="src/test/results/screenshot-709274a7-6c91-4dd2-9cd7-dbc292693b90.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-709274a7-6c91-4dd2-9cd7-dbc292693b90.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:42:48</td>
+																		<td class='step-name'>Click on Search Button</td>
+																	<td class='step-details'>Expected: Employee details should be displayed in the Results Grid | Actual: Employee Details displayed successfully<a href="src/test/results/screenshot-ab182263-a89b-4dec-b5c2-a336dcc89c69.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-ab182263-a89b-4dec-b5c2-a336dcc89c69.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:42:53</td>
+																		<td class='step-name'>Click on Employee Last Name Hyperlink</td>
+																	<td class='step-details'>Expected: A popup should be displayed to enter date and Enrolling details | Actual: Popup displayed successfully<a href="src/test/results/screenshot-3e350060-fe6c-4336-a075-57b34295e1c1.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-3e350060-fe6c-4336-a075-57b34295e1c1.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:42:59</td>
+																		<td class='step-name'>Click on Ok on the Popup</td>
+																	<td class='step-details'>Expected: New Page should be displayed with Report a Life Event hyperlink | Actual: New Page displayed successfully with Report a Life Event Hyperlink<a href="src/test/results/screenshot-94a174c1-18da-41bd-a760-64a797ba3cba.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-94a174c1-18da-41bd-a760-64a797ba3cba.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:42:59</td>
+																		<td class='step-name'>Click on Report a Life Event Hyperlink</td>
+																	<td class='step-details'>Expected: Report a Life Event Pop-up should be displayed | Actual: Report a Life Event Pop-up displayed successfully<a href="src/test/results/screenshot-85e02607-8dd2-4fb6-bf9a-0bd3d4521b82.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-85e02607-8dd2-4fb6-bf9a-0bd3d4521b82.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:43:04</td>
+																		<td class='step-name'>Select Admin Correction from the dropdown and Current Date in the Pop-Up</td>
+																	<td class='step-details'>Expected: Admin Correction and Current Date in the Pop-Up should be selected | Actual: Admin Correction and Current Date in the Pop-Up selected successfully<a href="src/test/results/screenshot-bfef0945-083b-440b-b406-14b1caf1cd2f.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-bfef0945-083b-440b-b406-14b1caf1cd2f.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:43:14</td>
+																		<td class='step-name'>Click on Submit in the Pop-up</td>
+																	<td class='step-details'>Expected: New Page with Employee Confirmation Details should be displayed | Actual: New Page with Employee Confirmation Details displayed successfully<a href="src/test/results/screenshot-8b7203b4-8a24-4879-a09c-10d9ec680f8c.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-8b7203b4-8a24-4879-a09c-10d9ec680f8c.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:47:47</td>
+																		<td class='step-name'>Click on Submit</td>
+																	<td class='step-details'>Expected: New Page with Admin Correction Link should be displayed | Actual: New Page with Admin Correction link displayed successfully<a href="src/test/results/screenshot-98f10435-82ec-4ccc-a440-5a04b5d062d0.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-98f10435-82ec-4ccc-a440-5a04b5d062d0.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:47:54</td>
+																		<td class='step-name'>Click on Admin Correction Link</td>
+																	<td class='step-details'>Expected: Enrollments Page with Eligibility Summary link on the right should be displayed | Actual: Enrollments Page with Eligibility Summary link on the right should be displayed successfully<a href="src/test/results/screenshot-1d4151ff-c077-4209-bbb1-91a2185ba675.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-1d4151ff-c077-4209-bbb1-91a2185ba675.png"></a></td>
+																</tr>
+																<tr>
+																	<td class='status pass' title='pass' alt='pass'><i class='mdi-action-check-circle'></i></td>
+																	<td class='timestamp'>09:48:04</td>
+																		<td class='step-name'>Verify if the Eligibility Summary Opens in a new web page</td>
+																	<td class='step-details'>Expected: Eligibility Summary of the Employee should be opened in a new web page | Actual: Eligibility Summary of the Employee Opens in a new web page successfully<a href="src/test/results/screenshot-9113bf56-6e5f-4415-b061-fa9df831f7bd.png" data-featherlight="image"><img class="report-img" src="src/test/results/screenshot-9113bf56-6e5f-4415-b061-fa9df831f7bd.png"></a></td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id='test-details-wrapper' class='col _addedCell2'>
+					<div class='contents'>
+						<div class='card-panel details-view'>
+							<h5 class='details-name'></h5>
+							<div class='step-filters right'>
+								<span class='btn-floating btn-small waves-effect waves-light blue' status='info' alt='info' title='info'><i class='mdi-action-info-outline'></i></span>
+								<span class='btn-floating btn-small waves-effect waves-light green' status='pass' alt='pass' title='pass'><i class='mdi-action-check-circle'></i></span>
+								<span class='btn-floating btn-small waves-effect waves-light red' status='fail' alt='fail' title='fail'><i class='mdi-navigation-cancel'></i></span>
+								<span class='btn-floating btn-small waves-effect waves-light red darken-4' status='fatal' alt='fatal' title='fatal'><i class='mdi-navigation-cancel'></i></span>
+								<span class='btn-floating btn-small waves-effect waves-light red lighten-2' status='error' alt='error' title='error'><i class='mdi-alert-error'></i></span>
+								<span class='btn-floating btn-small waves-effect waves-light orange' alt='warning' status='warning' title='warning'><i class='mdi-alert-warning'></i></span>
+								<span class='btn-floating btn-small waves-effect waves-light cyan' status='skip' alt='skip' title='skip'><i class='mdi-content-redo'></i></span>
+								<span class='btn-floating btn-small waves-effect waves-light grey darken-2' status='clear-step-filter' alt='Clear filters' title='Clear filters'><i class='mdi-content-clear'></i></span>
+							</div>
+							<div class='details-container'>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /tests -->
+			
+			<!-- categories -->
+			<!-- /categories -->
+			
+			<!-- exceptions -->
+			<!-- /exceptions -->
+			
+			<!-- testrunner logs -->
+			<!-- /testrunner logs -->
+			
+		</div>
+		<!-- /container -->
+		
+		<!-- test dashboard counts setting -->
+		<div id='test-count-setting' class='modal bottom-sheet'> 
+			<div class='modal-content'> 
+				<h5>Configure Tests Count Setting</h5> 
+				<input name='test-count-setting' type='radio' id='parentWithoutNodes' class='with-gap'> 
+				<label for='parentWithoutNodes'>Parent Tests Only (Does not include child nodes in counts)</label> 
+				<br> 
+				<input name='test-count-setting' type='radio' id='parentWithoutNodesAndNodes' class='with-gap'> 
+				<label for='parentWithoutNodesAndNodes'>Parent Tests Without Child Tests + Child Tests</label> 
+				<br> 
+				<input name='test-count-setting' type='radio' id='childNodes' class='with-gap'> 
+				<label for='childNodes'>Child Tests Only</label> 
+			</div> 
+			<div class='modal-footer'> 
+				<a href='#!' class='modal-action modal-close waves-effect waves-green btn'>Save</a> 
+			</div> 
+		</div>
+		<!-- /test dashboard counts setting -->
+		
+		<!-- filter for step status -->
+		<div id='step-status-filter' class='modal bottom-sheet'> 
+			<div class='modal-content'> 
+				<h5>Select status</h5> 
+				<input checked class='filled-in' type='checkbox' id='step-dashboard-filter-pass'> 
+				<label for='step-dashboard-filter-pass'>Pass</label> 
+				<br> 
+				<input checked class='filled-in' type='checkbox' id='step-dashboard-filter-fail'> 
+				<label for='step-dashboard-filter-fail'>Fail</label> 
+				<br> 
+				<input checked class='filled-in' type='checkbox' id='step-dashboard-filter-fatal'> 
+				<label for='step-dashboard-filter-fatal'>Fatal</label> 
+				<br> 
+				<input checked class='filled-in' type='checkbox' id='step-dashboard-filter-error'> 
+				<label for='step-dashboard-filter-error'>Error</label> 
+				<br> 
+				<input checked class='filled-in' type='checkbox' id='step-dashboard-filter-warning'> 
+				<label for='step-dashboard-filter-warning'>Warning</label> 
+				<br> 
+				<input checked class='filled-in' type='checkbox' id='step-dashboard-filter-skip'> 
+				<label for='step-dashboard-filter-skip'>Skipped</label> 
+				<br> 
+				<input checked class='filled-in' type='checkbox' id='step-dashboard-filter-info'> 
+				<label for='step-dashboard-filter-info'>Info</label> 
+				<br> 
+				<input checked class='filled-in' type='checkbox' id='step-dashboard-filter-unknown'> 
+				<label for='step-dashboard-filter-unknown'>Unknown</label> 
+			</div>
+			<div class='modal-footer'> 
+				<a href='#!' class='modal-action modal-close waves-effect waves-green btn'>Save</a> 
+			</div> 
+		</div>
+		<!-- /filter for step status -->
+		
+		<script src='https://cdn.rawgit.com/anshooarora/extentreports/6032d73243ba4fe4fb8769eb9c315d4fdf16fe68/cdn/extent.js' type='text/javascript'></script>
+
+		<script>$(document).ready(function() { $('.logo span').html('ExtentReports'); });</script>
+		<script>
+				
+            
+                $(document).ready(function() {
+                    
+                });
+            
+        
+		</script>
+	</body>
+</html>
